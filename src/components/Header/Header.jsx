@@ -1,15 +1,16 @@
+import './Header.css';
 import React from 'react';
 import Logo from './components/Logo/Logo';
-import Name from './components/Logo/Name';
+import UserName from './components/UserName/UserName';
 import Button from '../../common/Button/Button';
 
 function Header() {
 	return (
-		<>
+		<header className='header'>
 			<Logo />
-			<Name />
+			<UserName />
 			<Button buttonText={'Logout'} />
-		</>
+		</header>
 	);
 }
 

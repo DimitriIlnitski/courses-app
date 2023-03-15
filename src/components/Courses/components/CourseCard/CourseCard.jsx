@@ -1,18 +1,25 @@
+import './CourseCard.css';
 import React from 'react';
 import Button from '../../../../common/Button/Button';
 
 function CourseCard(props) {
 	const { title, description, creationDate, duration, authors } = props;
 	return (
-		<article>
+		<article className='course-card'>
 			<div>
-				<h6>{title}</h6>
-				<p>{description}</p>
+				<h6 className='course-card__title'>{title}</h6>
+				<p className='course-card__description'>{description}</p>
 			</div>
 			<div>
-				<p>Authors: {authors}</p>
-				<p>Duration: {duration} </p>
-				<p>Created: {creationDate}</p>
+				<p>
+					<b>Authors:</b> {authors}
+				</p>
+				<p>
+					<b>Duration:</b> {duration}{' '}
+				</p>
+				<p>
+					<b>Created:</b> {creationDate}
+				</p>
 				<Button buttonText={'Show course'} />
 			</div>
 		</article>

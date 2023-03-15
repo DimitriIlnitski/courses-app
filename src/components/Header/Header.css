@@ -1,0 +1,10 @@
+.header {
+	height: 100px;
+	border: 2px solid pink;
+
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: 1fr;
+	align-items: center;
+	justify-content: center;
+}

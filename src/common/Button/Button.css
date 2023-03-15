@@ -1,0 +1,6 @@
+.button-style {
+	border: 2px solid rgb(148, 53, 148);
+	width: fit-content;
+	grid-column: 6;
+	justify-self: center;
+}

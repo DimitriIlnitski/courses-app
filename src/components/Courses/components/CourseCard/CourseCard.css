@@ -1,0 +1,9 @@
+.course-card{
+    border: 2px solid green;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 3%;
+    padding: 1%;
+    margin: 0.5vw 0;
+}
