@@ -7,9 +7,11 @@ import Button from '../../common/Button/Button';
 function Header() {
 	return (
 		<header className='header'>
-			<Logo />
-			<UserName />
-			<Button buttonText={'Logout'} />
+			<div className='header_wrapper'>
+				<Logo />
+				<UserName />
+				<Button buttonText={'Logout'} />
+			</div>
 		</header>
 	);
 }

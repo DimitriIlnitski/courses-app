@@ -1,6 +1,8 @@
 .button-style {
 	border: 2px solid rgb(148, 53, 148);
+	background-color: white;
+	font-weight: bold;
 	width: fit-content;
-	grid-column: 6;
-	justify-self: center;
+	grid-column: 8;
+	justify-self: end;
 }
