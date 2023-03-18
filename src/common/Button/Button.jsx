@@ -2,9 +2,14 @@ import './Button.css';
 import React from 'react';
 
 const Button = (props) => {
-	const { buttonText, onClickHandler } = props;
+	const { buttonText, onClickHandler, buttonClass } = props;
+	const combinedClassNames = `button ${buttonClass}`;
 	return (
-		<button type='submit' className='button-style' onClick={onClickHandler}>
+		<button
+			className={combinedClassNames}
+			type='submit'
+			onClick={onClickHandler}
+		>
 			{buttonText}
 		</button>
 	);

@@ -34,7 +34,7 @@ html,
 body {
   height: 100%;
   line-height: 1;
-  font-size: 15px;
+  font-size: 17px;
   color: #363636;
 }
 
@@ -46,4 +46,9 @@ body {
 .container{
     width: 95vw;
     margin: 0 auto;
+}
+
+.main_wrapper {
+	padding: 0 2%;
+	border: 2px solid rgb(36, 209, 192);
 }
