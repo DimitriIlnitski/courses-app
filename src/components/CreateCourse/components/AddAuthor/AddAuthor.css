@@ -1,0 +1,9 @@
+.add-author__label {
+	display: block;
+	border: 1px solid red;
+}
+
+.add-author__title{
+    font-weight: bold;
+    text-align: center;
+}

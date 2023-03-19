@@ -1,5 +1,9 @@
 export default function formatTime(timeInMinutes) {
-	let hours = Math.floor(timeInMinutes / 60);
-	let minutes = timeInMinutes - hours * 60;
-	return `${hours}:${minutes} `;
+	if (typeof timeInMinutes !== 'undefined' && timeInMinutes.length > 0) {
+		let hours = Math.floor(Number(timeInMinutes) / 60);
+		let minutes = Number(timeInMinutes) - hours * 60;
+		return `${hours}:${minutes} `;
+	} else {
+		return `--:--`;
+	}
 }

@@ -1,0 +1,8 @@
+.search-bar {
+	background-color: aqua;
+	display: block;
+}
+
+.search-bar__label {
+	display: none;
+}

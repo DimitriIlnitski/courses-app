@@ -3,12 +3,16 @@ import React, { useState, useContext } from 'react';
 import AppContext from '../../helpers/AppContext';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
-import AuthorTile from './components/AuthorTile';
+import AuthorTile from './components/AuthorTile/AuthorTile';
+import Description from './components/Description/Description';
+import { v4 as uuidv4 } from 'uuid';
+import AddAuthor from './components/AddAuthor/AddAuthor';
+import Duration from './components/Duration/Duration';
 
 function CreateCourse() {
 	const { courseList, setCourseList, authorsList, setAuthorsList } =
 		useContext(AppContext);
-	const [courseAuthors, setCourseAuthors] = useState([{}]);
+	const [newAuthor, setNewAuthor] = useState('');
 	const [course, setCourse] = useState({
 		id: '',
 		title: '',
@@ -17,16 +21,25 @@ function CreateCourse() {
 		duration: 0,
 		authors: [''],
 	});
+	const newAuthorName = (params) => {
+		console.log(newAuthor);
+		setNewAuthor(params);
+	};
+	const createAuthor = (e) => {
+		e.prevetDefault();
+		// console.log(newAuthor);
+		// setAuthorsList([...authorsList, { id: uuidv4(), name: newAuthor }]);
+	};
 
 	return (
 		<section className='main'>
 			<div className='main__wrapper'>
-				<form className='create-course'>
+				<div className='create-course'>
 					<div className='create-course__title-wrapper'>
 						<Input
 							labelText={'Title'}
 							labelClass={'create-course__label'}
-							placeholdetText={'Enter title...'}
+							placeholderText={'Enter title...'}
 							getParams
 						/>
 						<Button
@@ -34,37 +47,14 @@ function CreateCourse() {
 							buttonText={'Create course'}
 						/>
 					</div>
-					<div>
-						<label className='create-course__label' htmlFor='textarea'>
-							Description
-						</label>
-						<textarea
-							className='create-course__textarea'
-							type='textarea'
-							id='textarea'
-							name='textarea'
-							placeholdetText={'Enter duration in minutes...'}
-							minLength={2}
-						></textarea>
-					</div>
-					<fieldset className='create-course__fieldset'>
+					<Description />
+					<div className='create-course__fieldset'>
 						<div>
-							<h2 className='create-course__title'>Add author</h2>
-							<Input
-								labelText={'Author name'}
-								labelClass={'create-course__label'}
-								placeholdetText={'Enter author name...'}
-								getParams
+							<AddAuthor
+								newAuthorName={newAuthorName}
+								createAuthor={createAuthor}
 							/>
-							<Button buttonText={'Create author'} />
-							<h2 className='create-course__title'>Duration</h2>
-							<Input
-								labelText={'Duration'}
-								labelClass={'create-course__label'}
-								placeholdetText={'Enter duration in minutes...'}
-								getParams
-							/>
-							<p>Duration: {} hours</p>
+							<Duration />
 						</div>
 						<div>
 							<h2 className='create-course__title'>Authors</h2>
@@ -72,6 +62,7 @@ function CreateCourse() {
 								{authorsList.map((author) => {
 									return (
 										<AuthorTile
+											key={author.id}
 											authorName={author.name}
 											buttonInfo='Add author'
 										/>
@@ -83,6 +74,7 @@ function CreateCourse() {
 								{authorsList.map((author) => {
 									return (
 										<AuthorTile
+											key={author.id}
 											authorName={author.name}
 											buttonInfo='Delete author'
 										/>
@@ -90,8 +82,8 @@ function CreateCourse() {
 								})}
 							</ul>
 						</div>
-					</fieldset>
-				</form>
+					</div>
+				</div>
 			</div>
 		</section>
 	);

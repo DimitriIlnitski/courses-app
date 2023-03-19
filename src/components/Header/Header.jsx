@@ -10,7 +10,7 @@ function Header() {
 			<div className='header_wrapper'>
 				<Logo />
 				<UserName />
-				<Button buttonText={'Logout'} />
+				<Button buttonText={'Logout'} buttonClass={'header__button'} />
 			</div>
 		</header>
 	);

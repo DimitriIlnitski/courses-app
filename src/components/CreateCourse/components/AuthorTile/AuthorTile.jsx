@@ -1,6 +1,6 @@
 import './AuthorTile.css';
 import React from 'react';
-import Button from '../../../common/Button/Button';
+import Button from '../../../../common/Button/Button';
 
 function AuthorTile(props) {
 	const { authorName, buttonInfo } = props;
