@@ -6,6 +6,7 @@ function Input({
 	labelClass,
 	placeholderText,
 	inputName,
+	inputClassName,
 	getParams,
 }) {
 	const [data, setData] = useState('');
@@ -16,7 +17,7 @@ function Input({
 			</label>
 
 			<input
-				className='input-field'
+				className={`input-field ${inputClassName}`}
 				type='text'
 				id={'input-field'}
 				name={inputName}

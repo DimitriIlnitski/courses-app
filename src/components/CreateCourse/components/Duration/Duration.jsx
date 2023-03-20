@@ -13,9 +13,14 @@ function Duration() {
 				labelText={'Duration'}
 				labelClass={'duration__label'}
 				placeholderText={'Enter duration in minutes...'}
+				inputClassName={'duration__input'}
 				getParams={getParams}
 			/>
-			<p>Duration: {formatTime(time)} hours</p>
+			<p className='duration__timer'>
+				Duration:
+				<span className='duration__timer--fz-bold'> {formatTime(time)} </span>
+				hours
+			</p>
 		</div>
 	);
 }

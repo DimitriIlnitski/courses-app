@@ -25,11 +25,15 @@ function Courses() {
 	};
 
 	return (
-		<section className='main'>
+		<main className='main'>
 			<div className='main__wrapper'>
 				<div className='course-controls'>
 					<SearchBar getParams={getParams} handleSubmit={handleSubmit} />
-					<Button buttonText={'Add new course'} onClickHandler={toggleView} />
+					<Button
+						buttonText={'Add new course'}
+						buttonClass={'course-controls__button'}
+						onClickHandler={toggleView}
+					/>
 				</div>
 				{filteredList(searchParams, courseList).map((course) => {
 					const { id, authors } = course;
@@ -39,7 +43,7 @@ function Courses() {
 					);
 				})}
 			</div>
-		</section>
+		</main>
 	);
 }
 

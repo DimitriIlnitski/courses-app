@@ -5,8 +5,3 @@
 	width: 8rem;
 	height: 1.7rem;
 }
-
-.header__button{
-	grid-column: 8;
-	justify-self: end;
-}

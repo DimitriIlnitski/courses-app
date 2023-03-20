@@ -12,7 +12,7 @@ function Description() {
 				type='textarea'
 				id='textarea'
 				name='textarea'
-				placeholder={'Enter duration in minutes...'}
+				placeholder={'  Enter description'}
 				minLength={2}
 			></textarea>
 		</div>

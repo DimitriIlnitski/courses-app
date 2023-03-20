@@ -32,16 +32,18 @@ function CreateCourse() {
 	};
 
 	return (
-		<section className='main'>
+		<main className='main'>
 			<div className='main__wrapper'>
 				<div className='create-course'>
 					<div className='create-course__title-wrapper'>
-						<Input
-							labelText={'Title'}
-							labelClass={'create-course__label'}
-							placeholderText={'Enter title...'}
-							getParams
-						/>
+						<div>
+							<Input
+								labelText={'Title'}
+								labelClass={'create-course__label'}
+								placeholderText={'  Enter title...'}
+								getParams
+							/>
+						</div>
 						<Button
 							buttonClass={'create-course__top-button'}
 							buttonText={'Create course'}
@@ -85,7 +87,7 @@ function CreateCourse() {
 					</div>
 				</div>
 			</div>
-		</section>
+		</main>
 	);
 }
 

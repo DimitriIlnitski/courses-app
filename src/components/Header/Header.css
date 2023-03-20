@@ -4,11 +4,17 @@
 }
 
 .header_wrapper {
+	width: inherit;
+	height: inherit;
 	padding: 0 2%;
 	display: grid;
 	grid-template-columns: repeat(8, 1fr);
 	grid-template-rows: 1fr;
 	align-items: center;
-	
-	justify-content: center;
+}
+
+.header__button{
+	grid-column: 8;
+	justify-self: end;
+	margin-left: 0.3rem;
 }

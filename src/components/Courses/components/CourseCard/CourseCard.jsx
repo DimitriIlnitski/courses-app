@@ -11,7 +11,7 @@ function CourseCard(props) {
 				<h2 className='course-card__title'>{title}</h2>
 				<p className='course-card__description'>{description}</p>
 			</div>
-			<div>
+			<div className='course-card__left-side'>
 				<p className='course-card__authors'>
 					<b>Authors:</b> {authors}
 				</p>
@@ -21,7 +21,10 @@ function CourseCard(props) {
 				<p>
 					<b>Created:</b> {creationDate}
 				</p>
-				<Button buttonText={'Show course'} />
+				<Button
+					buttonText={'Show course'}
+					buttonClass={'course-card__button'}
+				/>
 			</div>
 		</article>
 	);

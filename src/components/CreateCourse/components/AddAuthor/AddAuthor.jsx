@@ -5,17 +5,21 @@ import Input from '../../../../common/Input/Input';
 
 function AddAuthor(props) {
 	return (
-		<div>
+		<div className='add-author'>
 			<h2 className='add-author__title'>Add author</h2>
-			<form onSubmit={props.createAuthor}>
+			<form className='add-author__form' onSubmit={props.createAuthor}>
 				<Input
 					labelText={'Author name'}
 					labelClass={'add-author__label'}
-					placeholderText={'Enter author name...'}
+					placeholderText={'  Enter author name...'}
+					inputClassName={'add-author__input'}
 					minLength={2}
 					getParams={props.newAuthorName}
 				/>
-				<Button buttonText={'Create author'} />
+				<Button
+					buttonText={'Create author'}
+					buttonClass={'add-author__button'}
+				/>
 			</form>
 		</div>
 	);

@@ -1,3 +1,4 @@
+import './SearchBar.css';
 import React from 'react';
 import Input from '../../../../common/Input/Input';
 import Button from '../../../../common/Button/Button';
@@ -10,7 +11,7 @@ function SearchBar(props) {
 				placeholdetText={'Enter course name...'}
 				{...props}
 			/>
-			<Button buttonText={'Search'} />
+			<Button buttonText={'Search'} buttonClass={'search-bar__button'} />
 		</form>
 	);
 }
