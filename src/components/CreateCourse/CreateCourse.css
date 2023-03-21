@@ -1,4 +1,3 @@
-
 .create-course__title-wrapper {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -24,5 +23,14 @@
 
 .create-course__title {
 	font-weight: bold;
+	text-align: center;
+}
+
+.create-course__list {
+	margin: 0 0 3rem 0;
+}
+.create-course__list--empty {
+	margin: 1rem 0;
+	width: 95%;
 	text-align: center;
 }

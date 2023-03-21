@@ -1,11 +1,16 @@
 import './AuthorTile.css';
-import React, { useContext } from 'react';
-import AppContext from '../../../../helpers/AppContext';
+import React from 'react';
 import Button from '../../../../common/Button/Button';
 
 function AuthorTile(props) {
-	const { authorsList, setAuthorsList } = useContext(AppContext);
-	const { buttonInfo, author, courseAuthors, setCourseAuthors } = props;
+	const {
+		buttonInfo,
+		author,
+		courseAuthors,
+		setCourseAuthors,
+		availableAuthors,
+		setAvailableAuthors,
+	} = props;
 
 	const handleAuthorsLists = () => {
 		if (buttonInfo === 'Add author') {
@@ -13,14 +18,21 @@ function AuthorTile(props) {
 				...courseAuthors,
 				{ id: author.id, name: author.name },
 			]);
-			setAuthorsList(
-				authorsList.filter((item) => !item.id.includes(author.id))
+			setAvailableAuthors(
+				availableAuthors.filter((item) => !item.id.includes(author.id))
 			);
+			console.log(`available authors:1 ${availableAuthors}`);
+			console.log(`course authors1: ${courseAuthors}`);
 		} else if (buttonInfo === 'Delete author') {
-			setCourseAuthors(
-				...authorsList.filter((item) => !item.id.includes(author.id))
-			);
-			setAuthorsList([...authorsList, { id: author.id, name: author.id }]);
+			console.log(`available authors2: ${availableAuthors}`);
+			console.log(`course authors2: ${courseAuthors}`);
+			setCourseAuthors([
+				...courseAuthors.filter((item) => !item.id.includes(author.id)),
+			]);
+			setAvailableAuthors([
+				...availableAuthors,
+				{ id: author.id, name: author.name },
+			]);
 		}
 	};
 

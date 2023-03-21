@@ -1,13 +1,11 @@
 import './AddAuthor.css';
-import React, { useState, useContext } from 'react';
-import AppContext from '../../../../helpers/AppContext';
+import React, { useState } from 'react';
 import Button from '../../../../common/Button/Button';
 import Input from '../../../../common/Input/Input';
 import { v4 as uuidv4 } from 'uuid';
 
-function AddAuthor() {
-	const { authorsList, setAuthorsList } = useContext(AppContext);
-
+function AddAuthor(props) {
+	const { availableAuthors, setAvailableAuthors } = props;
 	const [newAuthor, setNewAuthor] = useState('');
 
 	const newAuthorName = (e) => {
@@ -16,7 +14,10 @@ function AddAuthor() {
 
 	const createAuthor = (e) => {
 		e.preventDefault();
-		setAuthorsList([...authorsList, { id: uuidv4(), name: newAuthor }]);
+		setAvailableAuthors([
+			...availableAuthors,
+			{ id: uuidv4(), name: newAuthor },
+		]);
 		setNewAuthor('');
 	};
 
