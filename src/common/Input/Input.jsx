@@ -1,33 +1,31 @@
 import './Input.css';
-import React, { useState } from 'react';
 
-function Input({
-	labelText,
-	labelClass,
-	placeholderText,
-	inputName,
-	inputClassName,
-	getParams,
-}) {
-	const [data, setData] = useState('');
+function Input(props) {
+	const {
+		labelText,
+		labelClass,
+		placeholderText,
+		inputName,
+		inputClassName,
+		inputData,
+		getInputData,
+	} = props;
+
 	return (
 		<>
-			<label className={labelClass} htmlFor={'input-field '}>
+			<label className={labelClass}>
 				{labelText}
+				<input
+					className={`input-field ${inputClassName}`}
+					type='text'
+					name={inputName}
+					value={inputData}
+					placeholder={placeholderText}
+					onChange={(e) => {
+						getInputData(e);
+					}}
+				/>
 			</label>
-
-			<input
-				className={`input-field ${inputClassName}`}
-				type='text'
-				id={'input-field'}
-				name={inputName}
-				placeholder={placeholderText}
-				value={data}
-				onChange={(e) => {
-					setData(e.target.value);
-					getParams(e.target.value);
-				}}
-			/>
 		</>
 	);
 }

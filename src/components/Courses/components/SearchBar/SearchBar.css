@@ -4,10 +4,6 @@
 	flex-wrap: nowrap;
 }
 
-.search-bar__label {
-	display: none;
-}
-
 .search-bar__button{
 	margin-left: 0.5rem;
 }

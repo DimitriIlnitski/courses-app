@@ -1,7 +1,8 @@
 import './Description.css';
 import React from 'react';
 
-function Description() {
+function Description(props) {
+	const { inputData, getInputData } = props;
 	return (
 		<div>
 			<label className='description__label' htmlFor='textarea'>
@@ -9,11 +10,13 @@ function Description() {
 			</label>
 			<textarea
 				className='description__textarea'
-				type='textarea'
-				id='textarea'
-				name='textarea'
+				name='description'
 				placeholder={'  Enter description'}
 				minLength={2}
+				value={inputData}
+				onChange={(e) => {
+					getInputData(e);
+				}}
 			></textarea>
 		</div>
 	);

@@ -2,11 +2,11 @@ import './Button.css';
 import React from 'react';
 
 const Button = (props) => {
-	const { buttonText, onClickHandler, buttonClass } = props;
+	const { buttonText, buttonClass, buttonType, onClickHandler } = props;
 	return (
 		<button
 			className={`button ${buttonClass}`}
-			type='submit'
+			type={buttonType || 'button'}
 			onClick={onClickHandler}
 		>
 			{buttonText}

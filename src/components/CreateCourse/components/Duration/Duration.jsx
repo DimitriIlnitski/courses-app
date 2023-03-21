@@ -1,11 +1,10 @@
 import './Duration.css';
-import React, { useState } from 'react';
+import React from 'react';
 import Input from '../../../../common/Input/Input';
 import formatTime from '../../../../helpers/formatTime';
 
-function Duration() {
-	const [time, setTime] = useState();
-	const getParams = (time) => setTime(time);
+function Duration(props) {
+	const { inputData, getInputData } = props;
 	return (
 		<div>
 			<h2 className='duration__title'>Duration</h2>
@@ -14,11 +13,15 @@ function Duration() {
 				labelClass={'duration__label'}
 				placeholderText={'Enter duration in minutes...'}
 				inputClassName={'duration__input'}
-				getParams={getParams}
+				inputName={'duration'}
+				inputData={inputData}
+				getInputData={getInputData}
 			/>
 			<p className='duration__timer'>
 				Duration:
-				<span className='duration__timer--fz-bold'> {formatTime(time)} </span>
+				<span className='duration__timer--fz-bold'>
+					{formatTime(inputData)}
+				</span>
 				hours
 			</p>
 		</div>

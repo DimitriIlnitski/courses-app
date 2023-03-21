@@ -5,30 +5,49 @@ import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 import AuthorTile from './components/AuthorTile/AuthorTile';
 import Description from './components/Description/Description';
-import { v4 as uuidv4 } from 'uuid';
 import AddAuthor from './components/AddAuthor/AddAuthor';
 import Duration from './components/Duration/Duration';
+import { v4 as uuidv4 } from 'uuid';
 
 function CreateCourse() {
-	const { courseList, setCourseList, authorsList, setAuthorsList } =
+	const { courseList, setCourseList, authorsList, setAuthorsList, setView } =
 		useContext(AppContext);
-	const [newAuthor, setNewAuthor] = useState('');
+
 	const [course, setCourse] = useState({
 		id: '',
 		title: '',
-		description: ``,
+		description: '',
 		creationDate: '',
-		duration: 0,
-		authors: [''],
+		duration: '',
+		authors: [],
 	});
-	const newAuthorName = (params) => {
-		console.log(newAuthor);
-		setNewAuthor(params);
+	const [courseAuthors, setCourseAuthors] = useState([]);
+
+	const handleChange = (e) => {
+		const name = e.target.name;
+		const value = e.target.value;
+		setCourse({ ...course, [name]: value }); // працює
 	};
-	const createAuthor = (e) => {
-		e.prevetDefault();
-		// console.log(newAuthor);
-		// setAuthorsList([...authorsList, { id: uuidv4(), name: newAuthor }]);
+
+	const createCourse = (e) => {
+		e.preventDefault();
+		setCourse((course) => {
+			return {
+				...course,
+				creationDate: new Date(),
+				authors: courseAuthors.map((item) => item.id),
+			};
+		});
+		// setCourseList([...courseList, course]);
+		// setCourse({
+		// 	id: uuidv4(),
+		// 	title: '',
+		// 	description: '',
+		// 	creationDate: '',
+		// 	duration: '',
+		// 	authors: [],
+		// });
+		// setView(true);
 	};
 
 	return (
@@ -41,22 +60,28 @@ function CreateCourse() {
 								labelText={'Title'}
 								labelClass={'create-course__label'}
 								placeholderText={'  Enter title...'}
-								getParams
+								inputName={'title'}
+								inputData={course.title}
+								getInputData={handleChange}
 							/>
 						</div>
 						<Button
 							buttonClass={'create-course__top-button'}
 							buttonText={'Create course'}
+							onClickHandler={createCourse}
 						/>
 					</div>
-					<Description />
+					<Description
+						inputData={course.description}
+						getInputData={handleChange}
+					/>
 					<div className='create-course__fieldset'>
 						<div>
-							<AddAuthor
-								newAuthorName={newAuthorName}
-								createAuthor={createAuthor}
+							<AddAuthor />
+							<Duration
+								inputData={course.duration}
+								getInputData={handleChange}
 							/>
-							<Duration />
 						</div>
 						<div>
 							<h2 className='create-course__title'>Authors</h2>
@@ -65,20 +90,24 @@ function CreateCourse() {
 									return (
 										<AuthorTile
 											key={author.id}
-											authorName={author.name}
+											author={author}
 											buttonInfo='Add author'
+											courseAuthors={courseAuthors}
+											setCourseAuthors={setCourseAuthors}
 										/>
 									);
 								})}
 							</ul>
 							<div className='create-course__title'>Course authors</div>
 							<ul>
-								{authorsList.map((author) => {
+								{courseAuthors.map((author) => {
 									return (
 										<AuthorTile
 											key={author.id}
-											authorName={author.name}
+											author={author}
 											buttonInfo='Delete author'
+											courseAuthors={courseAuthors}
+											setCourseAuthors={setCourseAuthors}
 										/>
 									);
 								})}

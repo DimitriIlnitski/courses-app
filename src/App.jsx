@@ -21,6 +21,8 @@ function App() {
 				setCourseList,
 				authorsList,
 				setAuthorsList,
+				view,
+				setView,
 			}}
 		>
 			<div className='container'>

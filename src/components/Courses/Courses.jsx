@@ -17,10 +17,12 @@ function Courses() {
 		e.preventDefault();
 		setSearchParams(searchParamsStore);
 	};
-	const getParams = (param) => {
-		setSearchParamsStore(param);
-		if (param.length === 0) {
-			setSearchParams(param);
+
+	const getSearchData = (e) => {
+		let value = e.target.value;
+		setSearchParamsStore(value);
+		if (value.length === 0) {
+			setSearchParams(value);
 		}
 	};
 
@@ -28,7 +30,11 @@ function Courses() {
 		<main className='main'>
 			<div className='main__wrapper'>
 				<div className='course-controls'>
-					<SearchBar getParams={getParams} handleSubmit={handleSubmit} />
+					<SearchBar
+						inputData={searchParamsStore}
+						getInputData={getSearchData}
+						handleSubmit={handleSubmit}
+					/>
 					<Button
 						buttonText={'Add new course'}
 						buttonClass={'course-controls__button'}
