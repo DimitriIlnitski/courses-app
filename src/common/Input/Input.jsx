@@ -7,6 +7,10 @@ function Input(props) {
 		placeholderText,
 		inputName,
 		inputClassName,
+		inputMinLen,
+		inputType,
+		isRequired,
+		inputPattern,
 		inputData,
 		getInputData,
 	} = props;
@@ -17,10 +21,13 @@ function Input(props) {
 				{labelText}
 				<input
 					className={`input-field ${inputClassName}`}
-					type='text'
+					type={inputType || 'text'}
 					name={inputName}
 					value={inputData}
 					placeholder={placeholderText}
+					minLength={inputMinLen}
+					required={isRequired || false}
+					pattern={inputPattern}
 					onChange={(e) => {
 						getInputData(e);
 					}}

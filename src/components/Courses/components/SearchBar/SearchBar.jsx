@@ -1,7 +1,10 @@
 import './SearchBar.css';
+
 import React from 'react';
-import Input from '../../../../common/Input/Input';
-import Button from '../../../../common/Button/Button';
+
+import { Input, Button } from '../../../../common';
+
+import { SEARCH } from '../../../../constants';
 
 function SearchBar(props) {
 	const { handleSubmit } = props;
@@ -9,7 +12,7 @@ function SearchBar(props) {
 		<form className='search-bar' onSubmit={handleSubmit}>
 			<Input placeholdetText={'Enter course name...'} {...props} />
 			<Button
-				buttonText={'Search'}
+				buttonText={SEARCH}
 				buttonClass={'search-bar__button'}
 				buttonType={'submit'}
 			/>

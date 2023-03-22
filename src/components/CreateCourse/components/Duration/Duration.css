@@ -17,6 +17,7 @@
 	font-size: 1.1rem;
 }
 .duration__timer--fz-bold  {
+	margin: 0 0.2rem;
 	font-size: 1.4rem;
 	font-weight: bold;
 }

@@ -48,8 +48,10 @@ body {
 	min-width: 991px;
 	margin: 0 auto;
 }
-
+.main {
+	padding-bottom: 5rem;
+}
 .main__wrapper {
-	padding: 0 2% 5rem 2%;
+	padding: 0 2% 2rem 2%;
 	border: 2px solid rgb(36, 209, 192);
 }

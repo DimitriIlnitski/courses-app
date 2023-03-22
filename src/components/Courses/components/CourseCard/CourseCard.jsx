@@ -1,7 +1,11 @@
 import './CourseCard.css';
+
 import React from 'react';
-import Button from '../../../../common/Button/Button';
-import formatTime from '../../../../helpers/formatTime';
+
+import { Button } from '../../../../common';
+
+import { formatTime } from '../../../../helpers';
+import { SHOW_COURSE } from '../../../../constants';
 
 function CourseCard(props) {
 	const { title, description, creationDate, duration, authors } = props;
@@ -21,10 +25,7 @@ function CourseCard(props) {
 				<p>
 					<b>Created:</b> {creationDate}
 				</p>
-				<Button
-					buttonText={'Show course'}
-					buttonClass={'course-card__button'}
-				/>
+				<Button buttonText={SHOW_COURSE} buttonClass={'course-card__button'} />
 			</div>
 		</article>
 	);

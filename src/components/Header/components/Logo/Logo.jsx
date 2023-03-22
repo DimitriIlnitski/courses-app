@@ -1,5 +1,7 @@
 import './Logo.css';
+
 import React from 'react';
+
 import epamImage from '../../../../assets/image/epam-logo-primary.png';
 
 const Logo = () => {

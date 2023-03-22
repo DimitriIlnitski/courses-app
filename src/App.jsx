@@ -1,17 +1,23 @@
 import './App.css';
-import Courses from './components/Courses/Courses';
-import CreateCourse from './components/CreateCourse/CreateCourse';
-import Header from './components/Header/Header';
-import React, { useState } from 'react';
-import AppContext from './helpers/AppContext';
+
+import React, { useState, useEffect } from 'react';
+
+import { Header, Courses, CreateCourse } from './components';
+
+import { AppContext } from './helpers';
 import { mockedCoursesList, mockedAuthorsList } from './constants';
 
 function App() {
 	const [view, setView] = useState(true);
-	const [courseList, setCourseList] = useState(mockedCoursesList);
-	const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
+	const [courseList, setCourseList] = useState([]);
+	const [authorsList, setAuthorsList] = useState([]);
 
 	const toggleView = () => setView(!view);
+
+	useEffect(() => {
+		setCourseList(mockedCoursesList);
+		setAuthorsList(mockedAuthorsList);
+	}, []);
 
 	return (
 		<AppContext.Provider

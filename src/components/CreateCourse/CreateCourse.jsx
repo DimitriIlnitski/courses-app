@@ -1,16 +1,17 @@
 import './CreateCourse.css';
+
 import React, { useState, useContext } from 'react';
-import AppContext from '../../helpers/AppContext';
-import Button from '../../common/Button/Button';
-import Input from '../../common/Input/Input';
-import AuthorTile from './components/AuthorTile/AuthorTile';
-import Description from './components/Description/Description';
-import AddAuthor from './components/AddAuthor/AddAuthor';
-import Duration from './components/Duration/Duration';
+
+import { Button, Input } from '../../common';
+import { AuthorTile, Description, AddAuthor, Duration } from './components';
+
 import { v4 as uuidv4 } from 'uuid';
 
+import { formatDate, AppContext } from '../../helpers';
+import { ADD_NEW_COURSE, ADD_AUTHOR, DELETE_AUTHOR } from '../../constants';
+
 function CreateCourse() {
-	const { courseList, setCourseList, authorsList, setAuthorsList, setView } =
+	const { courseList, setCourseList, authorsList, setView } =
 		useContext(AppContext);
 
 	const [title, setTitle] = useState('');
@@ -35,30 +36,38 @@ function CreateCourse() {
 
 	const createCourse = (e) => {
 		e.preventDefault();
-		let authList = courseAuthors.map((item) => item.id);
-		console.log(authList);
-		setCourseList([
-			...courseList,
-			{
-				id: uuidv4(),
-				title,
-				description,
-				duration,
-				creationDate: new Date().toLocaleString(),
-				authors: authList,
-			},
-		]);
-		setTitle('');
-		setDescription('');
-		setDuration('');
-		setView(true);
-		setCourseAuthors([]);
+		if (
+			title === '' ||
+			description === '' ||
+			duration <= 0 ||
+			courseAuthors.length === 0
+		) {
+			alert('Please, fill in all fields');
+		} else {
+			let authList = courseAuthors.map((item) => item.id);
+			setCourseList([
+				...courseList,
+				{
+					id: uuidv4(),
+					title,
+					description,
+					duration,
+					creationDate: formatDate(new Date()),
+					authors: authList,
+				},
+			]);
+			setTitle('');
+			setDescription('');
+			setDuration('');
+			setView(true);
+			setCourseAuthors([]);
+		}
 	};
 
 	return (
 		<main className='main'>
 			<div className='main__wrapper'>
-				<div className='create-course'>
+				<form className='create-course' onSubmit={createCourse}>
 					<div className='create-course__title-wrapper'>
 						<div>
 							<Input
@@ -66,14 +75,15 @@ function CreateCourse() {
 								labelClass={'create-course__label'}
 								placeholderText={'  Enter title...'}
 								inputName={'title'}
+								isRequired={true}
 								inputData={title}
 								getInputData={handleChangeTitle}
 							/>
 						</div>
 						<Button
 							buttonClass={'create-course__top-button'}
-							buttonText={'Create course'}
-							onClickHandler={createCourse}
+							buttonText={ADD_NEW_COURSE}
+							buttonType={'submit'}
 						/>
 					</div>
 					<Description
@@ -85,10 +95,12 @@ function CreateCourse() {
 							<AddAuthor
 								availableAuthors={availableAuthors}
 								setAvailableAuthors={setAvailableAuthors}
+								isRequired={true}
 							/>
 							<Duration
 								inputData={duration}
 								getInputData={handleChangeDuration}
+								isRequired={true}
 							/>
 						</div>
 						<div>
@@ -104,7 +116,7 @@ function CreateCourse() {
 											<AuthorTile
 												key={author.id}
 												author={author}
-												buttonInfo='Add author'
+												buttonInfo={ADD_AUTHOR}
 												courseAuthors={courseAuthors}
 												setCourseAuthors={setCourseAuthors}
 												availableAuthors={availableAuthors}
@@ -126,7 +138,7 @@ function CreateCourse() {
 											<AuthorTile
 												key={author.id}
 												author={author}
-												buttonInfo='Delete author'
+												buttonInfo={DELETE_AUTHOR}
 												courseAuthors={courseAuthors}
 												setCourseAuthors={setCourseAuthors}
 												availableAuthors={availableAuthors}
@@ -138,7 +150,7 @@ function CreateCourse() {
 							</ul>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</main>
 	);

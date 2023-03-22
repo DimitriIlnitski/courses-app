@@ -53,3 +53,11 @@ export const mockedAuthorsList = [
 		name: 'Valentina Larina',
 	},
 ];
+
+export const SEARCH = 'Search';
+export const LOGOUT = 'Logout';
+export const ADD_NEW_COURSE = 'Add new course';
+export const SHOW_COURSE = 'Show course';
+export const CREATE_AUTHOR = 'Create author';
+export const ADD_AUTHOR = 'Add author';
+export const DELETE_AUTHOR = 'Delete author';

@@ -1,11 +1,12 @@
 import './Courses.css';
+
 import React, { useState, useContext } from 'react';
-import SearchBar from './components/SearchBar/SearchBar';
-import CourseCard from './components/CourseCard/CourseCard';
-import getAuthorsList from '../../helpers/getAuthorsList';
-import filteredList from '../../helpers/filteredList';
-import Button from '../../common/Button/Button';
-import AppContext from '../../helpers/AppContext';
+
+import { SearchBar, CourseCard } from './components';
+import { Button } from '../../common';
+
+import { getAuthorsList, filteredList, AppContext } from '../../helpers';
+import { ADD_NEW_COURSE } from '../../constants';
 
 function Courses() {
 	const { toggleView, courseList, authorsList } = useContext(AppContext);
@@ -36,7 +37,7 @@ function Courses() {
 						handleSubmit={handleSubmit}
 					/>
 					<Button
-						buttonText={'Add new course'}
+						buttonText={ADD_NEW_COURSE}
 						buttonClass={'course-controls__button'}
 						onClickHandler={toggleView}
 					/>

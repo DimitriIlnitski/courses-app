@@ -14,7 +14,7 @@
 }
 .create-course__fieldset {
 	border: 2px solid black;
-	margin: 1rem 0 5rem 0;
+	margin: 1rem 0 0 0;
 	padding: 2rem;
 	display: grid;
 	grid-template-columns: 45% 50%;

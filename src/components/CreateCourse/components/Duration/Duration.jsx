@@ -1,10 +1,13 @@
 import './Duration.css';
+
 import React from 'react';
-import Input from '../../../../common/Input/Input';
-import formatTime from '../../../../helpers/formatTime';
+
+import { Input } from '../../../../common';
+
+import { formatTime } from '../../../../helpers';
 
 function Duration(props) {
-	const { inputData, getInputData } = props;
+	const { inputData, getInputData, isRequired } = props;
 	return (
 		<div>
 			<h2 className='duration__title'>Duration</h2>
@@ -16,6 +19,9 @@ function Duration(props) {
 				inputName={'duration'}
 				inputData={inputData}
 				getInputData={getInputData}
+				inputType={'number'}
+				inputPattern={'^[1-9]{1,}$'}
+				isRequired={isRequired}
 			/>
 			<p className='duration__timer'>
 				Duration:

@@ -1,6 +1,8 @@
 import './AuthorTile.css';
+
 import React from 'react';
-import Button from '../../../../common/Button/Button';
+
+import { Button } from '../../../../common';
 
 function AuthorTile(props) {
 	const {
@@ -21,11 +23,7 @@ function AuthorTile(props) {
 			setAvailableAuthors(
 				availableAuthors.filter((item) => !item.id.includes(author.id))
 			);
-			console.log(`available authors:1 ${availableAuthors}`);
-			console.log(`course authors1: ${courseAuthors}`);
 		} else if (buttonInfo === 'Delete author') {
-			console.log(`available authors2: ${availableAuthors}`);
-			console.log(`course authors2: ${courseAuthors}`);
 			setCourseAuthors([
 				...courseAuthors.filter((item) => !item.id.includes(author.id)),
 			]);

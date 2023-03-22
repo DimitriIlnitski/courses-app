@@ -1,8 +1,10 @@
 import './Header.css';
+
 import React from 'react';
-import Logo from './components/Logo/Logo';
-import UserName from './components/UserName/UserName';
-import Button from '../../common/Button/Button';
+
+import { Logo, UserName } from './components';
+import { Button } from '../../common';
+import { LOGOUT } from '../../constants';
 
 function Header() {
 	return (
@@ -10,7 +12,7 @@ function Header() {
 			<div className='header_wrapper'>
 				<Logo />
 				<UserName />
-				<Button buttonText={'Logout'} buttonClass={'header__button'} />
+				<Button buttonText={LOGOUT} buttonClass={'header__button'} />
 			</div>
 		</header>
 	);
