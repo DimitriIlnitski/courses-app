@@ -15,8 +15,8 @@ function AddAuthor(props) {
 	const { availableAuthors, setAvailableAuthors } = props;
 	const [newAuthor, setNewAuthor] = useState('');
 
-	const newAuthorName = (e) => {
-		setNewAuthor(e.target.value);
+	const newAuthorName = ({ target: { value } }) => {
+		setNewAuthor(value);
 	};
 
 	const createAuthor = () => {

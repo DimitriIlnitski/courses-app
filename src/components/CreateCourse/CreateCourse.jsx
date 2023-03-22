@@ -21,18 +21,15 @@ function CreateCourse() {
 	const [availableAuthors, setAvailableAuthors] = useState(authorsList);
 	const [courseAuthors, setCourseAuthors] = useState([]);
 
-	const handleChangeTitle = (e) => {
-		const value = e.target.value;
-		setTitle(value);
-	};
-	const handleChangeDescription = (e) => {
-		const value = e.target.value;
-		setDescription(value);
-	};
-	const handleChangeDuration = (e) => {
-		const value = e.target.value;
-		setDuration(value);
-	};
+	const handleChange =
+		(setter) =>
+		({ target: { value } }) => {
+			setter(value);
+		};
+
+	const handleChangeTitle = handleChange(setTitle);
+	const handleChangeDescription = handleChange(setDescription);
+	const handleChangeDuration = handleChange(setDuration);
 
 	const createCourse = (e) => {
 		e.preventDefault();
@@ -62,6 +59,35 @@ function CreateCourse() {
 			setView(true);
 			setCourseAuthors([]);
 		}
+	};
+
+	const AuthorList = ({
+		authors,
+		buttonInfo,
+		courseAuthors,
+		setCourseAuthors,
+		availableAuthors,
+		setAvailableAuthors,
+	}) => {
+		return (
+			<ul className='create-course__list'>
+				{authors.length === 0 ? (
+					<li className='create-course__list--empty'>Author list is empty</li>
+				) : (
+					authors.map((author) => (
+						<AuthorTile
+							key={author.id}
+							author={author}
+							buttonInfo={buttonInfo}
+							courseAuthors={courseAuthors}
+							setCourseAuthors={setCourseAuthors}
+							availableAuthors={availableAuthors}
+							setAvailableAuthors={setAvailableAuthors}
+						/>
+					))
+				)}
+			</ul>
+		);
 	};
 
 	return (
@@ -105,49 +131,25 @@ function CreateCourse() {
 						</div>
 						<div>
 							<h2 className='create-course__title'>Authors</h2>
-							<ul className='create-course__list'>
-								{availableAuthors.length === 0 ? (
-									<li className='create-course__list--empty'>
-										Author list is empty
-									</li>
-								) : (
-									availableAuthors.map((author) => {
-										return (
-											<AuthorTile
-												key={author.id}
-												author={author}
-												buttonInfo={ADD_AUTHOR}
-												courseAuthors={courseAuthors}
-												setCourseAuthors={setCourseAuthors}
-												availableAuthors={availableAuthors}
-												setAvailableAuthors={setAvailableAuthors}
-											/>
-										);
-									})
-								)}
-							</ul>
+							{
+								<AuthorList
+									authors={availableAuthors}
+									buttonInfo={ADD_AUTHOR}
+									courseAuthors={courseAuthors}
+									setCourseAuthors={setCourseAuthors}
+									availableAuthors={availableAuthors}
+									setAvailableAuthors={setAvailableAuthors}
+								/>
+							}
 							<div className='create-course__title'>Course authors</div>
-							<ul className='create-course__list'>
-								{courseAuthors.length === 0 ? (
-									<li className='create-course__list--empty'>
-										Author list is empty
-									</li>
-								) : (
-									courseAuthors.map((author) => {
-										return (
-											<AuthorTile
-												key={author.id}
-												author={author}
-												buttonInfo={DELETE_AUTHOR}
-												courseAuthors={courseAuthors}
-												setCourseAuthors={setCourseAuthors}
-												availableAuthors={availableAuthors}
-												setAvailableAuthors={setAvailableAuthors}
-											/>
-										);
-									})
-								)}
-							</ul>
+							<AuthorList
+								authors={courseAuthors}
+								buttonInfo={DELETE_AUTHOR}
+								courseAuthors={courseAuthors}
+								setCourseAuthors={setCourseAuthors}
+								availableAuthors={availableAuthors}
+								setAvailableAuthors={setAvailableAuthors}
+							/>
 						</div>
 					</div>
 				</form>

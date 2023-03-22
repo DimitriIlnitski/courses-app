@@ -19,12 +19,18 @@ function Courses() {
 		setSearchParams(searchParamsStore);
 	};
 
-	const getSearchData = (e) => {
-		let value = e.target.value;
+	const getSearchData = ({ target: { value } }) => {
 		setSearchParamsStore(value);
 		if (value.length === 0) {
 			setSearchParams(value);
 		}
+	};
+	const renderCourseList = (searchParams, courseList, authorsList) => {
+		return filteredList(searchParams, courseList).map((course) => {
+			const { id, authors } = course;
+			let authorsStringList = getAuthorsList(authors, authorsList);
+			return <CourseCard key={id} {...course} authors={authorsStringList} />;
+		});
 	};
 
 	return (
@@ -42,13 +48,7 @@ function Courses() {
 						onClickHandler={toggleView}
 					/>
 				</div>
-				{filteredList(searchParams, courseList).map((course) => {
-					const { id, authors } = course;
-					let authorsStringList = getAuthorsList(authors, authorsList);
-					return (
-						<CourseCard key={id} {...course} authors={authorsStringList} />
-					);
-				})}
+				{renderCourseList(searchParams, courseList, authorsList)}
 			</div>
 		</main>
 	);
