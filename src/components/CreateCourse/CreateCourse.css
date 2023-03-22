@@ -9,9 +9,17 @@
 	flex-direction: column;
 	margin-bottom: 0.2rem;
 }
-.create-course__top-button {
+.create-course__top-button-create {
+	grid-column: 2;
 	justify-self: end;
+	align-self: center;
 }
+.create-course__top-button-cancel {
+	grid-column: 2;
+	justify-self: end;
+	align-self: center;
+}
+
 .create-course__fieldset {
 	border: 2px solid black;
 	margin: 1rem 0 0 0;

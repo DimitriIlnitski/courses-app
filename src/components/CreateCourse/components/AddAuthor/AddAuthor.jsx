@@ -25,6 +25,8 @@ function AddAuthor(props) {
 			setAuthorsList([...authorsList, newObj]);
 			setAvailableAuthors([...availableAuthors, newObj]);
 			setNewAuthor('');
+		} else {
+			alert('Please enter name of new author');
 		}
 	};
 
@@ -34,9 +36,8 @@ function AddAuthor(props) {
 			<div className='add-author__form'>
 				<Input
 					labelText={'Author name'}
-					labelClass={'add-author__label'}
+					className={'add-author'}
 					placeholderText={'  Enter author name...'}
-					inputClassName={'add-author__input'}
 					inputName='author'
 					inputMinLen={2}
 					inputData={newAuthor}

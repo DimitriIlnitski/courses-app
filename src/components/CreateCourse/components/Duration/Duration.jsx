@@ -13,9 +13,8 @@ function Duration(props) {
 			<h2 className='duration__title'>Duration</h2>
 			<Input
 				labelText={'Duration'}
-				labelClass={'duration__label'}
+				className={'duration'}
 				placeholderText={'Enter duration in minutes...'}
-				inputClassName={'duration__input'}
 				inputName={'duration'}
 				inputData={inputData}
 				getInputData={getInputData}

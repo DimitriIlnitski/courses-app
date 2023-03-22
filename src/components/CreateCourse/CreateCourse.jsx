@@ -8,7 +8,12 @@ import { AuthorTile, Description, AddAuthor, Duration } from './components';
 import { v4 as uuidv4 } from 'uuid';
 
 import { formatDate, AppContext } from '../../helpers';
-import { ADD_NEW_COURSE, ADD_AUTHOR, DELETE_AUTHOR } from '../../constants';
+import {
+	ADD_NEW_COURSE,
+	ADD_AUTHOR,
+	DELETE_AUTHOR,
+	CANCEL,
+} from '../../constants';
 
 function CreateCourse() {
 	const { courseList, setCourseList, authorsList, setView } =
@@ -60,6 +65,9 @@ function CreateCourse() {
 			setCourseAuthors([]);
 		}
 	};
+	const cancel = () => {
+		setView(true);
+	};
 
 	const AuthorList = ({
 		authors,
@@ -98,7 +106,7 @@ function CreateCourse() {
 						<div>
 							<Input
 								labelText={'Title'}
-								labelClass={'create-course__label'}
+								className={'create-course'}
 								placeholderText={'  Enter title...'}
 								inputName={'title'}
 								isRequired={true}
@@ -107,9 +115,14 @@ function CreateCourse() {
 							/>
 						</div>
 						<Button
-							buttonClass={'create-course__top-button'}
+							buttonClass={'create-course__top-button-create'}
 							buttonText={ADD_NEW_COURSE}
 							buttonType={'submit'}
+						/>
+						<Button
+							buttonClass={'create-course__top-button-cancel'}
+							buttonText={CANCEL}
+							onClickHandler={cancel}
 						/>
 					</div>
 					<Description

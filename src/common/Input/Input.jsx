@@ -3,10 +3,11 @@ import './Input.css';
 function Input(props) {
 	const {
 		labelText,
-		labelClass,
+		className,
+		// labelClass,
 		placeholderText,
 		inputName,
-		inputClassName,
+		// inputClassName,
 		inputMinLen,
 		inputType,
 		isRequired,
@@ -17,10 +18,10 @@ function Input(props) {
 
 	return (
 		<>
-			<label className={labelClass}>
+			<label className={`${className}__label`}>
 				{labelText}
 				<input
-					className={`input-field ${inputClassName}`}
+					className={`input-field ${className}__input`}
 					type={inputType || 'text'}
 					name={inputName}
 					value={inputData}
