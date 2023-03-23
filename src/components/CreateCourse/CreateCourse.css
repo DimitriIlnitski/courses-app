@@ -1,0 +1,44 @@
+.create-course__title-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: end;
+	margin: 1rem 0;
+}
+.create-course__label {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0.2rem;
+}
+.create-course__top-button-create {
+	grid-column: 2;
+	justify-self: end;
+	align-self: center;
+}
+.create-course__top-button-cancel {
+	grid-column: 2;
+	justify-self: end;
+	align-self: center;
+}
+
+.create-course__fieldset {
+	border: 2px solid black;
+	margin: 1rem 0 0 0;
+	padding: 2rem;
+	display: grid;
+	grid-template-columns: 45% 50%;
+	gap: 4rem;
+}
+
+.create-course__title {
+	font-weight: bold;
+	text-align: center;
+}
+
+.create-course__list {
+	margin: 0 0 3rem 0;
+}
+.create-course__list--empty {
+	margin: 1rem 0;
+	width: 95%;
+	text-align: center;
+}

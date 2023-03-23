@@ -1,0 +1,10 @@
+.description__label {
+	display: block;
+}
+
+.description__textarea {
+	margin: 0.2rem 0;
+	width: 99.6%;
+	height: 5rem;
+	border: 2px solid yellow;
+}

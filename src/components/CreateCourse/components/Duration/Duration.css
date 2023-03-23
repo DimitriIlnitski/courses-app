@@ -1,0 +1,23 @@
+.duration__label {
+	display: block;
+	margin-bottom: 0.2rem;
+}
+
+.duration__title {
+	font-weight: bold;
+	text-align: center;
+}
+
+.duration__input {
+	display: block;
+	width: stretch;
+}
+
+.duration__timer {
+	font-size: 1.1rem;
+}
+.duration__timer--fz-bold  {
+	margin: 0 0.2rem;
+	font-size: 1.4rem;
+	font-weight: bold;
+}

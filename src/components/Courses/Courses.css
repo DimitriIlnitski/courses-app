@@ -1,0 +1,10 @@
+.course-controls{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem 0;
+}
+
+.course-controls__button {
+    justify-self: end;
+    margin-left: 0.3rem;
+}

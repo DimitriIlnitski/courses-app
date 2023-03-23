@@ -1,0 +1,6 @@
+.header__user-name {
+	font-weight: bold;
+	width:fit-content;
+	grid-column: 7;
+	justify-self: end;
+}

@@ -1,0 +1,26 @@
+.add-author {
+	margin-bottom: 5rem;
+}
+
+.add-author__form {
+	display: flex;
+	flex-direction: column;
+}
+.add-author__label {
+	display: block;
+	margin-bottom: 0.2rem;
+}
+
+.add-author__title {
+	font-weight: bold;
+	text-align: center;
+}
+
+.add-author__input {
+	display: block;
+	width: stretch;
+}
+.add-author__button {
+	margin-top: 1rem;
+	align-self: center;
+}

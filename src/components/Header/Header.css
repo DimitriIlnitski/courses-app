@@ -1,0 +1,20 @@
+.header {
+	height: 100px;
+	border: 2px solid pink;
+}
+
+.header_wrapper {
+	width: inherit;
+	height: inherit;
+	padding: 0 2%;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: 1fr;
+	align-items: center;
+}
+
+.header__button{
+	grid-column: 8;
+	justify-self: end;
+	margin-left: 0.3rem;
+}

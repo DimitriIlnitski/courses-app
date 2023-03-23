@@ -1,0 +1,9 @@
+.search-bar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.search-bar__button{
+	margin-left: 0.5rem;
+}
