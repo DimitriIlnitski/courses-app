@@ -69,35 +69,25 @@ function CreateCourse() {
 		setView(true);
 	};
 
-	const AuthorList = ({
-		authors,
-		buttonInfo,
-		courseAuthors,
-		setCourseAuthors,
-		availableAuthors,
-		setAvailableAuthors,
-	}) => {
-		return (
-			<ul className='create-course__list'>
-				{authors.length === 0 ? (
-					<li className='create-course__list--empty'>Author list is empty</li>
-				) : (
-					authors.map((author) => (
-						<AuthorTile
-							key={author.id}
-							author={author}
-							buttonInfo={buttonInfo}
-							courseAuthors={courseAuthors}
-							setCourseAuthors={setCourseAuthors}
-							availableAuthors={availableAuthors}
-							setAvailableAuthors={setAvailableAuthors}
-						/>
-					))
-				)}
-			</ul>
-		);
-	};
-
+	const renderAuthorList = (authors, buttonInfo) => (
+		<ul className='create-course__list'>
+			{authors.length === 0 ? (
+				<li className='create-course__list--empty'>Author list is empty</li>
+			) : (
+				authors.map((author) => (
+					<AuthorTile
+						key={author.id}
+						author={author}
+						buttonInfo={buttonInfo}
+						courseAuthors={courseAuthors}
+						setCourseAuthors={setCourseAuthors}
+						availableAuthors={availableAuthors}
+						setAvailableAuthors={setAvailableAuthors}
+					/>
+				))
+			)}
+		</ul>
+	);
 	return (
 		<main className='main'>
 			<div className='main__wrapper'>
@@ -144,25 +134,9 @@ function CreateCourse() {
 						</div>
 						<div>
 							<h2 className='create-course__title'>Authors</h2>
-							{
-								<AuthorList
-									authors={availableAuthors}
-									buttonInfo={ADD_AUTHOR}
-									courseAuthors={courseAuthors}
-									setCourseAuthors={setCourseAuthors}
-									availableAuthors={availableAuthors}
-									setAvailableAuthors={setAvailableAuthors}
-								/>
-							}
+							{renderAuthorList(availableAuthors, ADD_AUTHOR)}
 							<div className='create-course__title'>Course authors</div>
-							<AuthorList
-								authors={courseAuthors}
-								buttonInfo={DELETE_AUTHOR}
-								courseAuthors={courseAuthors}
-								setCourseAuthors={setCourseAuthors}
-								availableAuthors={availableAuthors}
-								setAvailableAuthors={setAvailableAuthors}
-							/>
+							{renderAuthorList(courseAuthors, DELETE_AUTHOR)}
 						</div>
 					</div>
 				</form>
