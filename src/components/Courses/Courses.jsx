@@ -34,23 +34,21 @@ function Courses() {
 	};
 
 	return (
-		<main className='main'>
-			<div className='main__wrapper'>
-				<div className='course-controls'>
-					<SearchBar
-						inputData={searchParamsStore}
-						getInputData={getSearchData}
-						handleSubmit={handleSubmit}
-					/>
-					<Button
-						buttonText={ADD_NEW_COURSE}
-						buttonClass={'course-controls__button'}
-						onClickHandler={toggleView}
-					/>
-				</div>
-				{renderCourseList(searchParams, courseList, authorsList)}
+		<>
+			<div className='course-controls'>
+				<SearchBar
+					inputData={searchParamsStore}
+					getInputData={getSearchData}
+					handleSubmit={handleSubmit}
+				/>
+				<Button
+					buttonText={ADD_NEW_COURSE}
+					buttonClass={'course-controls__button'}
+					onClickHandler={toggleView}
+				/>
 			</div>
-		</main>
+			{renderCourseList(searchParams, courseList, authorsList)}
+		</>
 	);
 }
 
