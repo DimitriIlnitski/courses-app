@@ -12,7 +12,9 @@
 	padding: 0 2% 2rem 2%;
 	border: 2px solid rgb(36, 209, 192);
 
-	display: flex;
+	position: relative;
+
+	/* display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: center; */
 }

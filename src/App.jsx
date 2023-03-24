@@ -16,7 +16,8 @@ import { AppContext } from './helpers';
 import { mockedCoursesList, mockedAuthorsList } from './constants';
 
 function App() {
-	const [user, setUser] = useState(null);
+	// const [user, setUser] = useState(null);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [courseList, setCourseList] = useState([]);
 	const [authorsList, setAuthorsList] = useState([]);
 
@@ -32,6 +33,8 @@ function App() {
 				setCourseList,
 				authorsList,
 				setAuthorsList,
+				isLoggedIn,
+				setIsLoggedIn,
 			}}
 		>
 			<BrowserRouter>
@@ -40,6 +43,9 @@ function App() {
 						<Route path='register' element={<Registration />} />
 						<Route path='login' element={<Login />} />
 						<Route path='courses' element={<Courses />} />
+						<Route path='courses/add' element={<CreateCourse />} />
+						<Route path='courses/:id' element={<CourseInfo />} />
+						<Route path='*' element={<div>Path not resolved</div>} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

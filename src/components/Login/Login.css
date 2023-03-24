@@ -4,6 +4,11 @@
 	align-items: center;
 	width: 22rem;
 	height: 22rem;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 .login__title {
 	font-size: 1.3rem;

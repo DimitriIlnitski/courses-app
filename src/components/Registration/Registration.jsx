@@ -1,16 +1,19 @@
 import './Registration.css';
 
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import { Input, Button } from '../../common';
 import { REGISTRATION } from '../../constants';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { postRequest } from '../../helpers';
 
 function Registration() {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const navigate = useNavigate();
 
 	const handleChange =
 		(setter) =>
@@ -26,26 +29,15 @@ function Registration() {
 		e.preventDefault();
 		if (!name || !email || !password) return;
 
-		const userData = {
+		const newUser = {
 			name: name,
 			email: email,
 			password: password,
 		};
 
-		async function registerUser() {
-			try {
-				const response = await axios.post(
-					'http://localhost:4000/register',
-					userData
-				);
-				console.log('Registration response:', response.data);
-			} catch (error) {
-				console.error('Error registering user:', error.response.data);
-			}
-		}
-		registerUser();
+		postRequest('/register', newUser, 'User have not been registered');
 
-		// Navigate('/login');
+		navigate('/login');
 	};
 
 	return (

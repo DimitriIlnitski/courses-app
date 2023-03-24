@@ -1,14 +1,20 @@
 import './Login.css';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { Input, Button } from '../../common';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppContext } from '../../helpers';
+
 import { LOGIN } from '../../constants';
-import { Link } from 'react-router-dom';
+import { postRequest } from '../../helpers';
 
 function Login() {
+	const { setIsLoggedIn } = useContext(AppContext);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const navigate = useNavigate();
 
 	const handleChange =
 		(setter) =>
@@ -19,7 +25,25 @@ function Login() {
 	const handleChangeEmail = handleChange(setEmail);
 	const handleChangePassword = handleChange(setPassword);
 
-	const login = () => {};
+	const login = async (e) => {
+		e.preventDefault();
+		if (!email || !password) return;
+
+		const userData = {
+			email: email,
+			password: password,
+		};
+
+		let { result, user } = await postRequest(
+			'/login',
+			userData,
+			'User is not registered. Please register'
+		);
+		let authData = { token: result, user: user };
+		localStorage.setItem('authData', JSON.stringify(authData));
+		setIsLoggedIn(true);
+		navigate('/courses');
+	};
 
 	return (
 		<form className='login' onSubmit={login}>

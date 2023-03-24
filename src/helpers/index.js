@@ -5,3 +5,4 @@ export { default as filteredList } from './filteredList';
 export { default as formatDate } from './formatDate';
 export { default as formatTime } from './formatTime';
 export { default as getAuthorsList } from './getAuthorsList';
+export { default as postRequest } from './postRequest';
