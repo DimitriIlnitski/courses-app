@@ -16,7 +16,6 @@ import { AppContext } from './helpers';
 import { mockedCoursesList, mockedAuthorsList } from './constants';
 
 function App() {
-	// const [user, setUser] = useState(null);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [courseList, setCourseList] = useState([]);
 	const [authorsList, setAuthorsList] = useState([]);
