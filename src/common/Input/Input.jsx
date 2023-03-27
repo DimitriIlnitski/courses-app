@@ -4,10 +4,8 @@ function Input(props) {
 	const {
 		labelText,
 		className,
-		// labelClass,
 		placeholderText,
 		inputName,
-		// inputClassName,
 		inputMinLen,
 		inputType,
 		isRequired,

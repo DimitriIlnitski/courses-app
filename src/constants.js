@@ -62,3 +62,5 @@ export const SHOW_COURSE = 'Show course';
 export const CREATE_AUTHOR = 'Create author';
 export const ADD_AUTHOR = 'Add author';
 export const DELETE_AUTHOR = 'Delete author';
+export const REGISTRATION = 'Registration';
+export const LOGIN = 'Login';

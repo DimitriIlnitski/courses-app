@@ -1,40 +1,79 @@
 import './App.css';
 
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Header, Courses, CreateCourse } from './components';
+import {
+	Container,
+	Courses,
+	CreateCourse,
+	Login,
+	Registration,
+	CourseInfo,
+	ProtectedRoute,
+} from './components';
 
 import { AppContext } from './helpers';
 import { mockedCoursesList, mockedAuthorsList } from './constants';
 
 function App() {
-	const [view, setView] = useState(true);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [courseList, setCourseList] = useState([]);
 	const [authorsList, setAuthorsList] = useState([]);
-
-	const toggleView = () => setView(!view);
 
 	useEffect(() => {
 		setCourseList(mockedCoursesList);
 		setAuthorsList(mockedAuthorsList);
+		let auth = JSON.parse(localStorage.getItem('authData'))?.token;
+		if (auth) {
+			setIsLoggedIn(true);
+		}
 	}, []);
 
 	return (
 		<AppContext.Provider
 			value={{
-				toggleView,
 				courseList,
 				setCourseList,
 				authorsList,
 				setAuthorsList,
-				view,
-				setView,
+				isLoggedIn,
+				setIsLoggedIn,
 			}}
 		>
-			<div className='container'>
-				<Header />
-				{view ? <Courses /> : <CreateCourse />}
-			</div>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<Container />}>
+						<Route path='register' element={<Registration />} />
+						<Route path='login' element={<Login />} />
+						<Route
+							path='courses'
+							element={
+								<ProtectedRoute>
+									<Courses />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path='courses/add'
+							element={
+								<ProtectedRoute>
+									<CreateCourse />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path='courses/:id'
+							element={
+								<ProtectedRoute>
+									<CourseInfo />
+								</ProtectedRoute>
+							}
+						/>
+						<Route path='*' element={<div>Path not resolved</div>} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
 		</AppContext.Provider>
 	);
 }

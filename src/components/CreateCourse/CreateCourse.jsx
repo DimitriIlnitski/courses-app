@@ -1,6 +1,7 @@
 import './CreateCourse.css';
 
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, Input } from '../../common';
 import { AuthorTile, Description, AddAuthor, Duration } from './components';
@@ -16,9 +17,8 @@ import {
 } from '../../constants';
 
 function CreateCourse() {
-	const { courseList, setCourseList, authorsList, setView } =
-		useContext(AppContext);
-
+	const { courseList, setCourseList, authorsList } = useContext(AppContext);
+	const navigate = useNavigate();
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [duration, setDuration] = useState('');
@@ -61,12 +61,12 @@ function CreateCourse() {
 			setTitle('');
 			setDescription('');
 			setDuration('');
-			setView(true);
 			setCourseAuthors([]);
 		}
+		navigate('/courses');
 	};
 	const cancel = () => {
-		setView(true);
+		navigate('/courses');
 	};
 
 	const renderAuthorList = (authors, buttonInfo) => (
@@ -89,59 +89,57 @@ function CreateCourse() {
 		</ul>
 	);
 	return (
-		<main className='main'>
-			<div className='main__wrapper'>
-				<form className='create-course' onSubmit={createCourse}>
-					<div className='create-course__title-wrapper'>
-						<div>
-							<Input
-								labelText={'Title'}
-								className={'create-course'}
-								placeholderText={'  Enter title...'}
-								inputName={'title'}
-								isRequired={true}
-								inputData={title}
-								getInputData={handleChangeTitle}
-							/>
-						</div>
-						<Button
-							buttonClass={'create-course__top-button-create'}
-							buttonText={ADD_NEW_COURSE}
-							buttonType={'submit'}
-						/>
-						<Button
-							buttonClass={'create-course__top-button-cancel'}
-							buttonText={CANCEL}
-							onClickHandler={cancel}
+		<>
+			<form className='create-course' onSubmit={createCourse}>
+				<div className='create-course__title-wrapper'>
+					<div>
+						<Input
+							labelText={'Title'}
+							className={'create-course'}
+							placeholderText={'  Enter title...'}
+							inputName={'title'}
+							isRequired={true}
+							inputData={title}
+							getInputData={handleChangeTitle}
 						/>
 					</div>
-					<Description
-						inputData={description}
-						getInputData={handleChangeDescription}
+					<Button
+						buttonClass={'create-course__top-button-create'}
+						buttonText={ADD_NEW_COURSE}
+						buttonType={'submit'}
 					/>
-					<div className='create-course__fieldset'>
-						<div>
-							<AddAuthor
-								availableAuthors={availableAuthors}
-								setAvailableAuthors={setAvailableAuthors}
-								isRequired={true}
-							/>
-							<Duration
-								inputData={duration}
-								getInputData={handleChangeDuration}
-								isRequired={true}
-							/>
-						</div>
-						<div>
-							<h2 className='create-course__title'>Authors</h2>
-							{renderAuthorList(availableAuthors, ADD_AUTHOR)}
-							<div className='create-course__title'>Course authors</div>
-							{renderAuthorList(courseAuthors, DELETE_AUTHOR)}
-						</div>
+					<Button
+						buttonClass={'create-course__top-button-cancel'}
+						buttonText={CANCEL}
+						onClickHandler={cancel}
+					/>
+				</div>
+				<Description
+					inputData={description}
+					getInputData={handleChangeDescription}
+				/>
+				<div className='create-course__fieldset'>
+					<div>
+						<AddAuthor
+							availableAuthors={availableAuthors}
+							setAvailableAuthors={setAvailableAuthors}
+							isRequired={true}
+						/>
+						<Duration
+							inputData={duration}
+							getInputData={handleChangeDuration}
+							isRequired={true}
+						/>
 					</div>
-				</form>
-			</div>
-		</main>
+					<div>
+						<h2 className='create-course__title'>Authors</h2>
+						{renderAuthorList(availableAuthors, ADD_AUTHOR)}
+						<div className='create-course__title'>Course authors</div>
+						{renderAuthorList(courseAuthors, DELETE_AUTHOR)}
+					</div>
+				</div>
+			</form>
+		</>
 	);
 }
 

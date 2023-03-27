@@ -23,7 +23,7 @@
 	-webkit-line-clamp: 1;
 	overflow: hidden;
 }
-.course-card__left-side{
+.course-card__right-side{
 display: flex;
 flex-direction: column;
 }

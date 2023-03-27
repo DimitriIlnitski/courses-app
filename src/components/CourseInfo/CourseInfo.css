@@ -1,0 +1,35 @@
+.course-info {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1f;
+	grid-template-rows: 1fr 4fr;
+	gap: 3%;
+	padding: 1%;
+	margin: 0.5vw 0;
+}
+
+.course-info__title {
+	font-size: 2rem;
+	font-weight: bold;
+	grid-column: 1 / 4;
+	text-align: center;
+}
+
+.course-info__description {
+	font-size: 1.2rem;
+}
+
+.course-info__authors {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+}
+.course-info__right-side {
+	display: flex;
+	flex-direction: column;
+}
+
+.course-info__link{
+	display: block;
+	margin: 1rem;
+}
