@@ -12,7 +12,6 @@ function Header() {
 	const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 	const navigate = useNavigate();
 	const logout = () => {
-		localStorage.removeItem('authData');
 		setIsLoggedIn(false);
 		navigate('/login');
 	};

@@ -27,22 +27,28 @@ function Login() {
 
 	const login = async (e) => {
 		e.preventDefault();
-		if (!email || !password) return;
+		let auth = JSON.parse(localStorage.getItem('authData'))?.token;
+		if (!email || !password) {
+			return;
+		} else if (auth) {
+			setIsLoggedIn(true);
+			navigate('/courses');
+		} else {
+			const userData = {
+				email: email,
+				password: password,
+			};
 
-		const userData = {
-			email: email,
-			password: password,
-		};
-
-		let { result, user } = await postRequest(
-			'/login',
-			userData,
-			'User is not registered. Please register'
-		);
-		let authData = { token: result, user: user };
-		localStorage.setItem('authData', JSON.stringify(authData));
-		setIsLoggedIn(true);
-		navigate('/courses');
+			let { result, user } = await postRequest(
+				'/login',
+				userData,
+				'User is not registered. Please register'
+			);
+			let authData = { token: result, user: user };
+			localStorage.setItem('authData', JSON.stringify(authData));
+			setIsLoggedIn(true);
+			navigate('/courses');
+		}
 	};
 
 	return (
