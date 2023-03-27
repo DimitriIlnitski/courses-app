@@ -24,6 +24,10 @@ function App() {
 	useEffect(() => {
 		setCourseList(mockedCoursesList);
 		setAuthorsList(mockedAuthorsList);
+		let auth = JSON.parse(localStorage.getItem('authData'))?.token;
+		if (auth) {
+			setIsLoggedIn(true);
+		}
 	}, []);
 
 	return (
