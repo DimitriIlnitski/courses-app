@@ -10,6 +10,7 @@ import {
 	Login,
 	Registration,
 	CourseInfo,
+	ProtectedRoute,
 } from './components';
 
 import { AppContext } from './helpers';
@@ -41,9 +42,30 @@ function App() {
 					<Route path='/' element={<Container />}>
 						<Route path='register' element={<Registration />} />
 						<Route path='login' element={<Login />} />
-						<Route path='courses' element={<Courses />} />
-						<Route path='courses/add' element={<CreateCourse />} />
-						<Route path='courses/:id' element={<CourseInfo />} />
+						<Route
+							path='courses'
+							element={
+								<ProtectedRoute>
+									<Courses />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path='courses/add'
+							element={
+								<ProtectedRoute>
+									<CreateCourse />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path='courses/:id'
+							element={
+								<ProtectedRoute>
+									<CourseInfo />
+								</ProtectedRoute>
+							}
+						/>
 						<Route path='*' element={<div>Path not resolved</div>} />
 					</Route>
 				</Routes>

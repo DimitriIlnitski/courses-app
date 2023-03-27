@@ -1,13 +1,16 @@
 import './CourseInfo.css';
 
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AppContext, formatTime, getAuthorsList } from '../../helpers';
 
 function CourseInfo() {
 	const { courseList, authorsList } = useContext(AppContext);
 	const { id } = useParams();
-	const course = courseList.find((item) => item.id === id);
+
+	const memCourse = useMemo(() => {
+		return courseList.find((item) => item.id === id);
+	}, [id, courseList]);
 
 	return (
 		<>
@@ -15,22 +18,22 @@ function CourseInfo() {
 				{'< Back to courses'}
 			</Link>
 			<article className='course-info'>
-				<h2 className='course-info__title'>{course.title}</h2>
+				<h2 className='course-info__title'>{memCourse.title}</h2>
 				<div>
-					<p className='course-info__description'>{course.description}</p>
+					<p className='course-info__description'>{memCourse.description}</p>
 				</div>
 				<div className='course-info__right-side'>
 					<p className='course-info__authors'>
-						<b>ID:</b> {course.id}
+						<b>ID:</b> {memCourse.id}
 					</p>
 					<p>
-						<b>Duration:</b> {formatTime(course.duration)} hours
+						<b>Duration:</b> {formatTime(memCourse.duration)} hours
 					</p>
 					<p>
-						<b>Created:</b> {course.creationDate}
+						<b>Created:</b> {memCourse.creationDate}
 					</p>
 					<p className='course-info__authors'>
-						<b>Authors:</b> {getAuthorsList(course.authors, authorsList)}
+						<b>Authors:</b> {getAuthorsList(memCourse.authors, authorsList)}
 					</p>
 				</div>
 			</article>

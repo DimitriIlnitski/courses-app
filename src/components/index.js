@@ -5,3 +5,4 @@ export { default as Registration } from './Registration/Registration.jsx';
 export { default as CourseInfo } from './CourseInfo/CourseInfo.jsx';
 export { default as Login } from './Login/Login.jsx';
 export { default as Container } from './Container/Container.jsx';
+export { default as ProtectedRoute } from './ProtectedRoute/ProtectedRoute.jsx';

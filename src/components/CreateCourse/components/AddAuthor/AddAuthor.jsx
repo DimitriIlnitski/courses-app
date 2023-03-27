@@ -20,7 +20,7 @@ function AddAuthor(props) {
 	};
 
 	const createAuthor = () => {
-		if (newAuthor.length >= 2) {
+		if (new RegExp('^[A-Z][a-zA-Z]{2,}$', 'g').test(newAuthor)) {
 			let newObj = { id: uuidv4(), name: newAuthor };
 			setAuthorsList([...authorsList, newObj]);
 			setAvailableAuthors([...availableAuthors, newObj]);

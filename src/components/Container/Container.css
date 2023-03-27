@@ -5,6 +5,7 @@
 }
 .main {
 	padding-bottom: 1vh;
+	min-height: 600px;
 }
 .main__wrapper {
 	min-height: 100vh;
@@ -13,8 +14,4 @@
 	border: 2px solid rgb(36, 209, 192);
 
 	position: relative;
-
-	/* display: flex;
-	justify-content: center;
-	align-items: center; */
 }
