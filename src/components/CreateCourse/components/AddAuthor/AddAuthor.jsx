@@ -26,7 +26,9 @@ function AddAuthor(props) {
 			setAvailableAuthors([...availableAuthors, newObj]);
 			setNewAuthor('');
 		} else {
-			alert('Please enter name of new author');
+			alert(
+				'Please enter name of new author, which should start with capital letter'
+			);
 		}
 	};
 

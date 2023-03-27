@@ -13,6 +13,7 @@ function Header() {
 	const navigate = useNavigate();
 	const logout = () => {
 		setIsLoggedIn(false);
+		localStorage.removeItem('authData');
 		navigate('/login');
 	};
 
