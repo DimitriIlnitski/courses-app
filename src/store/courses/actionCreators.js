@@ -1,4 +1,9 @@
-import { ADD_COURSE } from './actionTypes.js';
+import {
+	ADD_COURSE,
+	DELETE_COURSE,
+	UPDATE_COURSE,
+	GET_COURSES,
+} from './actionTypes.js';
 
 export const addCourse = (course) => ({
 	type: ADD_COURSE,
@@ -6,11 +11,16 @@ export const addCourse = (course) => ({
 });
 
 export const deleteCourse = (courseId) => ({
-	type: ADD_COURSE,
+	type: DELETE_COURSE,
 	payload: courseId,
 });
 
 export const updateCourse = (course) => ({
-	type: ADD_COURSE,
+	type: UPDATE_COURSE,
 	payload: course,
+});
+
+export const getCourses = (courses) => ({
+	type: GET_COURSES,
+	payload: courses,
 });

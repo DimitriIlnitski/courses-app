@@ -1,7 +1,10 @@
 import './App.css';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { getRequest } from './services';
 
 import {
 	Container,
@@ -13,68 +16,65 @@ import {
 	ProtectedRoute,
 } from './components';
 
-import { AppContext } from './helpers';
-import { mockedCoursesList, mockedAuthorsList } from './constants';
-
 function App() {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [courseList, setCourseList] = useState([]);
-	const [authorsList, setAuthorsList] = useState([]);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setCourseList(mockedCoursesList);
-		setAuthorsList(mockedAuthorsList);
-		let auth = JSON.parse(localStorage.getItem('authData'))?.token;
-		if (auth) {
-			setIsLoggedIn(true);
+		async function getInitialData() {
+			let courseFetch = await getRequest('/courses/all');
+			let authorsFetch = await getRequest('/authors/all');
+			dispatch({ type: 'GET_COURSES', payload: courseFetch.result });
+			dispatch({ type: 'GET_AUTHORS', payload: authorsFetch.result });
+
+			let auth = JSON.parse(localStorage.getItem('authData'));
+			if (auth !== null) {
+				dispatch({
+					type: 'LOGIN',
+					payload: {
+						name: auth.name,
+						email: auth.email,
+						token: auth.token,
+					},
+				});
+			}
 		}
-	}, []);
+		getInitialData();
+	}, [dispatch]);
 
 	return (
-		<AppContext.Provider
-			value={{
-				courseList,
-				setCourseList,
-				authorsList,
-				setAuthorsList,
-				isLoggedIn,
-				setIsLoggedIn,
-			}}
-		>
-			<BrowserRouter>
-				<Routes>
-					<Route path='/' element={<Container />}>
-						<Route path='register' element={<Registration />} />
-						<Route path='login' element={<Login />} />
-						<Route
-							path='courses'
-							element={
-								<ProtectedRoute>
-									<Courses />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path='courses/add'
-							element={
-								<ProtectedRoute>
-									<CreateCourse />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path='courses/:id'
-							element={
-								<ProtectedRoute>
-									<CourseInfo />
-								</ProtectedRoute>
-							}
-						/>
-						<Route path='*' element={<div>Path not resolved</div>} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
-		</AppContext.Provider>
+		<BrowserRouter>
+			<Routes>
+				<Route path='/' element={<Container />}>
+					<Route path='register' element={<Registration />} />
+					<Route path='login' element={<Login />} />
+					<Route
+						path='courses'
+						element={
+							<ProtectedRoute>
+								<Courses />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='courses/add'
+						element={
+							<ProtectedRoute>
+								<CreateCourse />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path='courses/:id'
+						element={
+							<ProtectedRoute>
+								<CourseInfo />
+							</ProtectedRoute>
+						}
+					/>
+					<Route path='*' element={<div>Path not resolved</div>} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }
 

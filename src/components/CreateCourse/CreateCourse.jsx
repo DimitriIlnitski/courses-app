@@ -1,14 +1,16 @@
 import './CreateCourse.css';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Button, Input } from '../../common';
 import { AuthorTile, Description, AddAuthor, Duration } from './components';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { formatDate, AppContext } from '../../helpers';
+import { formatDate } from '../../helpers';
+import { getAuthors } from '../../selectors';
 import {
 	ADD_NEW_COURSE,
 	ADD_AUTHOR,
@@ -17,7 +19,10 @@ import {
 } from '../../constants';
 
 function CreateCourse() {
-	const { courseList, setCourseList, authorsList } = useContext(AppContext);
+	const authorsList = useSelector(getAuthors);
+
+	const dispatch = useDispatch();
+
 	const navigate = useNavigate();
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
@@ -47,9 +52,9 @@ function CreateCourse() {
 			alert('Please, fill in all fields');
 		} else {
 			let authList = courseAuthors.map((item) => item.id);
-			setCourseList([
-				...courseList,
-				{
+			dispatch({
+				type: 'ADD_COURSE',
+				payload: {
 					id: uuidv4(),
 					title,
 					description,
@@ -57,7 +62,7 @@ function CreateCourse() {
 					creationDate: formatDate(new Date()),
 					authors: authList,
 				},
-			]);
+			});
 			setTitle('');
 			setDescription('');
 			setDuration('');

@@ -2,15 +2,9 @@ import { LOGIN, LOGOUT } from './actionTypes.js';
 
 export const login = (user) => ({
 	type: LOGIN,
-	payload: user,
+	payload: { ...user },
 });
 
-export const logout = (user) => ({
+export const logout = () => ({
 	type: LOGOUT,
-	payload: {
-		isAuth: false,
-		name: '',
-		email: '',
-		token: '',
-	},
 });

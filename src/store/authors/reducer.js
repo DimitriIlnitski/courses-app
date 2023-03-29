@@ -1,16 +1,16 @@
-import { ADD_AUTHOR } from './actionTypes';
+import { ADD_AUTHOR, GET_AUTHORS } from './actionTypes';
 
-const initialStateOfAuthor = {
-	authors: [],
-};
+const authorsInitialState = [];
 
-const coursesReducer = (state = initialStateOfAuthor, action) => {
+const authorsReducer = (state = authorsInitialState, action) => {
 	switch (action.type) {
 		case ADD_AUTHOR:
-			return { ...state, authors: [...state.authors, action.payload] };
+			return [...state, action.payload];
+		case GET_AUTHORS:
+			return [...action.payload];
 		default:
 			return state;
 	}
 };
 
-export default coursesReducer;
+export default authorsReducer;

@@ -1,19 +1,20 @@
 import './Header.css';
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Logo, UserName } from './components';
 import { Button } from '../../common';
-import { AppContext } from '../../helpers';
 import { LOGOUT } from '../../constants';
+import { getUser } from '../../selectors';
 
 function Header() {
-	const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+	const user = useSelector(getUser);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const logout = () => {
-		setIsLoggedIn(false);
-		localStorage.removeItem('authData');
+		dispatch({ type: 'LOGOUT' });
 		navigate('/login');
 	};
 
@@ -23,7 +24,7 @@ function Header() {
 				<div className='header_wrapper'>
 					<Logo />
 					<UserName />
-					{isLoggedIn && (
+					{user.isAuth && (
 						<Button
 							onClickHandler={logout}
 							buttonText={LOGOUT}

@@ -1,6 +1,6 @@
-import * as action from './actionTypes';
+import { LOGIN, LOGOUT } from './actionTypes';
 
-const initialStateOfStore = {
+const userInitialState = {
 	user: {
 		isAuth: false,
 		name: '',
@@ -9,12 +9,18 @@ const initialStateOfStore = {
 	},
 };
 
-const userReducer = (state = initialStateOfStore, action) => {
+const userReducer = (state = userInitialState, action) => {
 	switch (action.type) {
-		case action.LOGIN:
-			return { ...state, user: action.payload };
-		case action.LOGOUT:
-			return { ...state, user: action.payload };
+		case LOGIN:
+			localStorage.setItem(
+				'authData',
+				JSON.stringify({ ...action.payload, isAuth: true })
+			);
+			// console.log({ ...action.payload, isAuth: true });
+			return { ...action.payload, isAuth: true };
+		case LOGOUT:
+			localStorage.clear();
+			return userInitialState;
 		default:
 			return state;
 	}

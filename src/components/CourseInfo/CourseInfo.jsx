@@ -1,11 +1,15 @@
 import './CourseInfo.css';
 
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AppContext, formatTime, getAuthorsList } from '../../helpers';
+import { useSelector } from 'react-redux';
+import { formatTime, getAuthorsList } from '../../helpers';
+import { getCourses, getAuthors } from '../../selectors';
 
 function CourseInfo() {
-	const { courseList, authorsList } = useContext(AppContext);
+	const courseList = useSelector(getCourses);
+	const authorsList = useSelector(getAuthors);
+
 	const { id } = useParams();
 
 	const memCourse = useMemo(() => {

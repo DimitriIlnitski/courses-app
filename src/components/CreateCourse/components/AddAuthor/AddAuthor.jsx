@@ -1,16 +1,16 @@
 import './AddAuthor.css';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Button, Input } from '../../../../common';
 
-import { AppContext } from '../../../../helpers';
 import { CREATE_AUTHOR } from '../../../../constants';
 
 import { v4 as uuidv4 } from 'uuid';
 
 function AddAuthor(props) {
-	const { authorsList, setAuthorsList } = useContext(AppContext);
+	const dispatch = useDispatch();
 
 	const { availableAuthors, setAvailableAuthors } = props;
 	const [newAuthor, setNewAuthor] = useState('');
@@ -22,7 +22,10 @@ function AddAuthor(props) {
 	const createAuthor = () => {
 		if (new RegExp('^[A-Z][a-zA-Z]{2,}$', 'g').test(newAuthor)) {
 			let newObj = { id: uuidv4(), name: newAuthor };
-			setAuthorsList([...authorsList, newObj]);
+			dispatch({
+				type: 'ADD_AUTHOR',
+				payload: newObj,
+			});
 			setAvailableAuthors([...availableAuthors, newObj]);
 			setNewAuthor('');
 		} else {

@@ -1,16 +1,17 @@
 import './Login.css';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Input, Button } from '../../common';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppContext } from '../../helpers';
 
 import { LOGIN } from '../../constants';
-import { postRequest } from '../../helpers';
+import { postRequest } from '../../services';
 
 function Login() {
-	const { setIsLoggedIn } = useContext(AppContext);
+	const dispatch = useDispatch();
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -27,12 +28,8 @@ function Login() {
 
 	const login = async (e) => {
 		e.preventDefault();
-		let auth = JSON.parse(localStorage.getItem('authData'))?.token;
 		if (!email || !password) {
 			return;
-		} else if (auth) {
-			setIsLoggedIn(true);
-			navigate('/courses');
 		} else {
 			const userData = {
 				email: email,
@@ -44,9 +41,15 @@ function Login() {
 				userData,
 				'User is not registered. Please register'
 			);
-			let authData = { token: result, user: user };
-			localStorage.setItem('authData', JSON.stringify(authData));
-			setIsLoggedIn(true);
+			dispatch({
+				type: 'LOGIN',
+				payload: {
+					name: user.name,
+					email: user.email,
+					token: result,
+				},
+			});
+
 			navigate('/courses');
 		}
 	};

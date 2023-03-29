@@ -1,25 +1,24 @@
-import { ADD_COURSE, DELETE_COURSE, UPDATE_COURSE } from './actionTypes';
+import {
+	ADD_COURSE,
+	DELETE_COURSE,
+	UPDATE_COURSE,
+	GET_COURSES,
+} from './actionTypes';
 
-const initialStateOfStore = {
-	courses: [],
-};
+const coursesInitialState = [];
 
-const coursesReducer = (state = initialStateOfStore, action) => {
+const coursesReducer = (state = coursesInitialState, action) => {
 	switch (action.type) {
 		case ADD_COURSE:
-			return { ...state, courses: [...state.courses, action.payload] };
+			return [...state, action.payload];
 		case DELETE_COURSE:
-			return {
-				...state,
-				courses: state.courses.filter((course) => course.id !== action.payload),
-			};
+			return state.filter((course) => course.id !== action.payload);
 		case UPDATE_COURSE:
-			return {
-				...state,
-				courses: state.courses.map((course) =>
-					course.id === action.payload.id ? action.payload : course
-				),
-			};
+			return state.map((course) =>
+				course.id === action.payload.id ? action.payload : course
+			);
+		case GET_COURSES:
+			return [...action.payload];
 		default:
 			return state;
 	}
