@@ -23,10 +23,33 @@
 	-webkit-line-clamp: 1;
 	overflow: hidden;
 }
-.course-card__right-side{
-display: flex;
-flex-direction: column;
+.course-card__right-side {
+	display: flex;
+	flex-direction: column;
 }
 .course-card__button {
 	align-self: center;
+}
+
+.course-card__button-pack {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.course-card__square-button-left {
+	width: 1.7rem;
+	margin-left: 0.5rem;
+	background-image: url("../../../../assets/image/edit.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 70%;
+}
+.course-card__square-button-right {
+	width: 1.7rem;
+	margin-left: 0.5rem;
+	background-image: url("../../../../assets/image/delete.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 70%;
 }

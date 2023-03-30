@@ -1,16 +1,20 @@
 import './Courses.css';
 
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { SearchBar, CourseCard } from './components';
 import { Button } from '../../common';
 
-import { getAuthorsList, filteredList, AppContext } from '../../helpers';
+import { getAuthorsList, filteredList } from '../../helpers';
 import { ADD_NEW_COURSE } from '../../constants';
+import { getCourses, getAuthors } from '../../selectors';
 
 function Courses() {
-	const { courseList, authorsList } = useContext(AppContext);
+	const courseList = useSelector(getCourses);
+	const authorsList = useSelector(getAuthors);
+
 	const navigate = useNavigate();
 
 	const [searchParamsStore, setSearchParamsStore] = useState('');
@@ -27,6 +31,7 @@ function Courses() {
 			setSearchParams(value);
 		}
 	};
+
 	const renderCourseList = (searchParams, courseList, authorsList) => {
 		return filteredList(searchParams, courseList).map((course) => {
 			const { id, authors } = course;

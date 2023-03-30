@@ -6,7 +6,7 @@ import { Input, Button } from '../../common';
 import { REGISTRATION } from '../../constants';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { postRequest } from '../../helpers';
+import { postRequest } from '../../services';
 
 function Registration() {
 	const [name, setName] = useState('');

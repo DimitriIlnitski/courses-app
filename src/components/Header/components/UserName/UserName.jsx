@@ -1,14 +1,13 @@
 import './UserName.css';
 
-import React, { useContext } from 'react';
-import { AppContext } from '../../../../helpers';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../../../selectors';
 
 function UserName() {
-	const { isLoggedIn } = useContext(AppContext);
-	return isLoggedIn ? (
-		<div className='header__user-name'>
-			{JSON.parse(localStorage.getItem('authData'))?.user?.name}
-		</div>
+	const user = useSelector(getUser);
+	return user.isAuth ? (
+		<div className='header__user-name'>{user.name}</div>
 	) : (
 		''
 	);

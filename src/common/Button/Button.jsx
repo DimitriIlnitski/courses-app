@@ -9,7 +9,7 @@ const Button = (props) => {
 			type={buttonType || 'button'}
 			onClick={onClickHandler}
 		>
-			{buttonText}
+			{buttonText || ''}
 		</button>
 	);
 };

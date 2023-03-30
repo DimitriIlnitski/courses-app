@@ -2,18 +2,27 @@ import './CourseCard.css';
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { Button } from '../../../../common';
 
 import { formatTime } from '../../../../helpers';
 import { SHOW_COURSE } from '../../../../constants';
+import { deleteCourse } from '../../../../store/courses/actionCreators';
 
 function CourseCard(props) {
 	const { id, title, description, creationDate, duration, authors } = props;
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const coursePage = () => {
 		navigate(`/courses/${id}`);
 	};
+	const deleteCourseInCard = () => {
+		dispatch(deleteCourse(id));
+	};
+	const updateCourseInCard = (id) => {};
+
 	return (
 		<article className='course-card'>
 			<div>
@@ -30,11 +39,21 @@ function CourseCard(props) {
 				<p>
 					<b>Created:</b> {creationDate}
 				</p>
-				<Button
-					buttonText={SHOW_COURSE}
-					buttonClass={'course-card__button'}
-					onClickHandler={coursePage}
-				/>
+				<div className='course-card__button-pack'>
+					<Button
+						buttonText={SHOW_COURSE}
+						buttonClass={'course-card__button'}
+						onClickHandler={coursePage}
+					/>
+					<Button
+						buttonClass={'course-card__square-button-left'}
+						onClickHandler={updateCourseInCard}
+					/>
+					<Button
+						buttonClass={'course-card__square-button-right'}
+						onClickHandler={deleteCourseInCard}
+					/>
+				</div>
 			</div>
 		</article>
 	);
