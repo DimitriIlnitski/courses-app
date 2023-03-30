@@ -6,10 +6,11 @@ function ProtectedRoute({ children }) {
 	const user = useSelector(getUser);
 	const navigate = useNavigate();
 	useEffect(() => {
-		if (!user.isAuth) {
+		let auth = JSON.parse(localStorage.getItem('authData'));
+		if (auth === null) {
 			navigate('/login');
 		}
-	}, [user.isAuth, navigate]);
+	}, []);
 
 	return user.isAuth && children;
 }
