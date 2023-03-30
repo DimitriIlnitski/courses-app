@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { getRequest } from './services';
-
+import { getCourses } from './store/courses/actionCreators';
+import { getAuthors } from './store/authors/actionCreators';
 import {
 	Container,
 	Courses,
@@ -23,23 +24,11 @@ function App() {
 		async function getInitialData() {
 			let courseFetch = await getRequest('/courses/all');
 			let authorsFetch = await getRequest('/authors/all');
-			dispatch({ type: 'GET_COURSES', payload: courseFetch.result });
-			dispatch({ type: 'GET_AUTHORS', payload: authorsFetch.result });
-
-			let auth = JSON.parse(localStorage.getItem('authData'));
-			if (auth !== null) {
-				dispatch({
-					type: 'LOGIN',
-					payload: {
-						name: auth.name,
-						email: auth.email,
-						token: auth.token,
-					},
-				});
-			}
+			dispatch(getCourses(courseFetch.result));
+			dispatch(getAuthors(authorsFetch.result));
 		}
 		getInitialData();
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<BrowserRouter>
