@@ -8,6 +8,7 @@ import { Button } from '../../../../common';
 
 import { formatTime } from '../../../../helpers';
 import { SHOW_COURSE } from '../../../../constants';
+import { deleteCourse } from '../../../../store/courses/actionCreators';
 
 function CourseCard(props) {
 	const { id, title, description, creationDate, duration, authors } = props;
@@ -17,10 +18,10 @@ function CourseCard(props) {
 	const coursePage = () => {
 		navigate(`/courses/${id}`);
 	};
-	const deleteCourse = () => {
-		dispatch({ type: 'DELETE_COURSE', payload: id });
+	const deleteCourseInCard = () => {
+		dispatch(deleteCourse(id));
 	};
-	const updateCourse = (id) => {};
+	const updateCourseInCard = (id) => {};
 
 	return (
 		<article className='course-card'>
@@ -46,11 +47,11 @@ function CourseCard(props) {
 					/>
 					<Button
 						buttonClass={'course-card__square-button-left'}
-						onClickHandler={updateCourse}
+						onClickHandler={updateCourseInCard}
 					/>
 					<Button
 						buttonClass={'course-card__square-button-right'}
-						onClickHandler={deleteCourse}
+						onClickHandler={deleteCourseInCard}
 					/>
 				</div>
 			</div>

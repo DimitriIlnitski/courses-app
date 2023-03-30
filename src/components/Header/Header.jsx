@@ -8,13 +8,14 @@ import { Logo, UserName } from './components';
 import { Button } from '../../common';
 import { LOGOUT } from '../../constants';
 import { getUser } from '../../selectors';
+import { logoutUser } from '../../store/user/actionCreators';
 
 function Header() {
 	const user = useSelector(getUser);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const logout = () => {
-		dispatch({ type: 'LOGOUT' });
+		dispatch(logoutUser());
 		navigate('/login');
 	};
 

@@ -1,10 +1,10 @@
 import { LOGIN, LOGOUT } from './actionTypes.js';
 
-export const login = (user) => ({
+export const loginUser = (user) => ({
 	type: LOGIN,
 	payload: { ...user },
 });
 
-export const logout = () => ({
+export const logoutUser = () => ({
 	type: LOGOUT,
 });

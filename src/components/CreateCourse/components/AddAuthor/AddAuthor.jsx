@@ -8,6 +8,7 @@ import { Button, Input } from '../../../../common';
 import { CREATE_AUTHOR } from '../../../../constants';
 
 import { v4 as uuidv4 } from 'uuid';
+import { addAuthor } from '../../../../store/authors/actionCreators';
 
 function AddAuthor(props) {
 	const dispatch = useDispatch();
@@ -22,10 +23,7 @@ function AddAuthor(props) {
 	const createAuthor = () => {
 		if (new RegExp('^[A-Z][a-zA-Z]{2,}$', 'g').test(newAuthor)) {
 			let newObj = { id: uuidv4(), name: newAuthor };
-			dispatch({
-				type: 'ADD_AUTHOR',
-				payload: newObj,
-			});
+			dispatch(addAuthor(newObj));
 			setAvailableAuthors([...availableAuthors, newObj]);
 			setNewAuthor('');
 		} else {

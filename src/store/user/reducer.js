@@ -16,7 +16,6 @@ const userReducer = (state = userInitialState, action) => {
 				'authData',
 				JSON.stringify({ ...action.payload, isAuth: true })
 			);
-			// console.log({ ...action.payload, isAuth: true });
 			return { ...action.payload, isAuth: true };
 		case LOGOUT:
 			localStorage.clear();

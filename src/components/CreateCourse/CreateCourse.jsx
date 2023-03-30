@@ -17,6 +17,7 @@ import {
 	DELETE_AUTHOR,
 	CANCEL,
 } from '../../constants';
+import { addCourse } from '../../store/courses/actionCreators';
 
 function CreateCourse() {
 	const authorsList = useSelector(getAuthors);
@@ -52,17 +53,16 @@ function CreateCourse() {
 			alert('Please, fill in all fields');
 		} else {
 			let authList = courseAuthors.map((item) => item.id);
-			dispatch({
-				type: 'ADD_COURSE',
-				payload: {
+			dispatch(
+				addCourse({
 					id: uuidv4(),
 					title,
 					description,
 					duration,
 					creationDate: formatDate(new Date()),
 					authors: authList,
-				},
-			});
+				})
+			);
 			setTitle('');
 			setDescription('');
 			setDuration('');

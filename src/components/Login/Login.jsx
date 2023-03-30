@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { LOGIN } from '../../constants';
 import { postRequest } from '../../services';
+import { loginUser } from '../../store/user/actionCreators';
 
 function Login() {
 	const dispatch = useDispatch();
@@ -41,14 +42,13 @@ function Login() {
 				userData,
 				'User is not registered. Please register'
 			);
-			dispatch({
-				type: 'LOGIN',
-				payload: {
+			dispatch(
+				loginUser({
 					name: user.name,
 					email: user.email,
 					token: result,
-				},
-			});
+				})
+			);
 
 			navigate('/courses');
 		}
