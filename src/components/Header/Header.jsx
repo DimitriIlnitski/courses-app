@@ -14,8 +14,10 @@ function Header() {
 	const user = useSelector(getUser);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const logout = () => {
-		dispatch(logoutUser());
+
+	const logout = async () => {
+		let authToken = localStorage.getItem('authData');
+		dispatch(logoutUser(authToken));
 		navigate('/login');
 	};
 

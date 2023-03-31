@@ -1,7 +1,7 @@
-import './CreateCourse.css';
+import './CourseForm.css';
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Button, Input } from '../../common';
@@ -9,8 +9,8 @@ import { AuthorTile, Description, AddAuthor, Duration } from './components';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { formatDate } from '../../helpers';
-import { getAuthors } from '../../selectors';
+import { formatDate, getAuthorsList } from '../../helpers';
+import { getAuthors, getCourses } from '../../selectors';
 import {
 	ADD_NEW_COURSE,
 	ADD_AUTHOR,
@@ -19,18 +19,40 @@ import {
 } from '../../constants';
 import { addCourse } from '../../store/courses/actionCreators';
 
-function CreateCourse() {
+function CreateCourse({ update }) {
+	const coursesList = useSelector(getCourses);
 	const authorsList = useSelector(getAuthors);
 
 	const dispatch = useDispatch();
-
+	const { id } = useParams();
 	const navigate = useNavigate();
+
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [duration, setDuration] = useState('');
 
 	const [availableAuthors, setAvailableAuthors] = useState(authorsList);
 	const [courseAuthors, setCourseAuthors] = useState([]);
+
+	useEffect(() => {
+		if (update) {
+			let idWithoutSemicolon = id.slice(1);
+			let course = coursesList.find((item) => item.id === idWithoutSemicolon);
+			setTitle(course.title);
+			setDescription(course.description);
+			setDuration(course.duration);
+			let filteredCourseAuthors = getAuthorsList(
+				course.authors,
+				availableAuthors
+			);
+			//some problem in here
+			console.log(setCourseAuthors(filteredCourseAuthors));
+			setCourseAuthors(filteredCourseAuthors);
+			setAvailableAuthors((prev) =>
+				prev.filter((author) => courseAuthors.includes(author.id))
+			);
+		}
+	}, []);
 
 	const handleChange =
 		(setter) =>

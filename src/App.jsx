@@ -7,14 +7,16 @@ import { useDispatch } from 'react-redux';
 import { getRequest } from './services';
 import { getCourses } from './store/courses/actionCreators';
 import { getAuthors } from './store/authors/actionCreators';
+import { reLoginUser } from './store/user/actionCreators';
 import {
 	Container,
 	Courses,
-	CreateCourse,
+	CourseForm,
 	Login,
 	Registration,
 	CourseInfo,
 	ProtectedRoute,
+	PrivateRouter,
 } from './components';
 
 function App() {
@@ -47,9 +49,17 @@ function App() {
 					<Route
 						path='courses/add'
 						element={
-							<ProtectedRoute>
-								<CreateCourse />
-							</ProtectedRoute>
+							<PrivateRouter>
+								<CourseForm update={false} />
+							</PrivateRouter>
+						}
+					/>
+					<Route
+						path='courses/update/:id'
+						element={
+							<PrivateRouter>
+								<CourseForm update={true} />
+							</PrivateRouter>
 						}
 					/>
 					<Route

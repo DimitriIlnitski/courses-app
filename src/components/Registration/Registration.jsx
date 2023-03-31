@@ -1,14 +1,16 @@
 import './Registration.css';
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Input, Button } from '../../common';
 import { REGISTRATION } from '../../constants';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { postRequest } from '../../services';
+import { registrationUser } from '../../store/user/actionCreators';
 
 function Registration() {
+	const dispatch = useDispatch();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -35,7 +37,7 @@ function Registration() {
 			password: password,
 		};
 
-		postRequest('/register', newUser, 'User have not been registered');
+		dispatch(registrationUser('/register', newUser));
 
 		navigate('/login');
 	};

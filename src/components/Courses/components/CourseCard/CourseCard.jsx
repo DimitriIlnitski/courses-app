@@ -2,26 +2,31 @@ import './CourseCard.css';
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../../../common';
 
 import { formatTime } from '../../../../helpers';
 import { SHOW_COURSE } from '../../../../constants';
+import { getUser } from '../../../../selectors';
 import { deleteCourse } from '../../../../store/courses/actionCreators';
 
 function CourseCard(props) {
 	const { id, title, description, creationDate, duration, authors } = props;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const { role } = useSelector(getUser);
 
 	const coursePage = () => {
 		navigate(`/courses/${id}`);
 	};
 	const deleteCourseInCard = () => {
-		dispatch(deleteCourse(id));
+		let token = localStorage.getItem('authData');
+		dispatch(deleteCourse(id, token));
 	};
-	const updateCourseInCard = (id) => {};
+	const updateCourseInCard = () => {
+		navigate(`/courses/update/:${id}`);
+	};
 
 	return (
 		<article className='course-card'>
@@ -39,20 +44,30 @@ function CourseCard(props) {
 				<p>
 					<b>Created:</b> {creationDate}
 				</p>
-				<div className='course-card__button-pack'>
+				<div
+					className={
+						role === 'admin'
+							? 'course-card__button-pack'
+							: 'course-card__button-single'
+					}
+				>
 					<Button
 						buttonText={SHOW_COURSE}
 						buttonClass={'course-card__button'}
 						onClickHandler={coursePage}
 					/>
-					<Button
-						buttonClass={'course-card__square-button-left'}
-						onClickHandler={updateCourseInCard}
-					/>
-					<Button
-						buttonClass={'course-card__square-button-right'}
-						onClickHandler={deleteCourseInCard}
-					/>
+					{role === 'admin' && (
+						<Button
+							buttonClass={'course-card__square-button-left'}
+							onClickHandler={updateCourseInCard}
+						/>
+					)}
+					{role === 'admin' && (
+						<Button
+							buttonClass={'course-card__square-button-right'}
+							onClickHandler={deleteCourseInCard}
+						/>
+					)}
 				</div>
 			</div>
 		</article>

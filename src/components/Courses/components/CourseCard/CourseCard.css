@@ -36,6 +36,11 @@
 	flex-direction: row;
 	justify-content: flex-end;
 }
+.course-card__button-single {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
 
 .course-card__square-button-left {
 	width: 1.7rem;

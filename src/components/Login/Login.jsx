@@ -7,7 +7,6 @@ import { Input, Button } from '../../common';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { LOGIN } from '../../constants';
-import { postRequest } from '../../services';
 import { loginUser } from '../../store/user/actionCreators';
 
 function Login() {
@@ -37,19 +36,7 @@ function Login() {
 				password: password,
 			};
 
-			let { result, user } = await postRequest(
-				'/login',
-				userData,
-				'User is not registered. Please register'
-			);
-			dispatch(
-				loginUser({
-					name: user.name,
-					email: user.email,
-					token: result,
-				})
-			);
-
+			dispatch(loginUser('/login', userData));
 			navigate('/courses');
 		}
 	};

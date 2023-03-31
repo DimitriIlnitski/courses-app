@@ -5,15 +5,21 @@ import {
 	GET_COURSES,
 } from './actionTypes.js';
 
+import { deleteCourseRequest } from '../../services.js';
+
 export const addCourse = (course) => ({
 	type: ADD_COURSE,
 	payload: course,
 });
 
-export const deleteCourse = (courseId) => ({
-	type: DELETE_COURSE,
-	payload: courseId,
-});
+export const deleteCourse = (courseId, token) => {
+	return async (dispatch) => {
+		if (courseId) {
+			deleteCourseRequest(courseId, token);
+			dispatch({ type: DELETE_COURSE, payload: courseId });
+		}
+	};
+};
 
 export const updateCourse = (course) => ({
 	type: UPDATE_COURSE,

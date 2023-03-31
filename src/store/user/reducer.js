@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from './actionTypes';
+import { LOGIN, LOGOUT, RE_LOGIN, REGISTRATION } from './actionTypes';
 
 const userInitialState = {
 	user: {
@@ -6,20 +6,24 @@ const userInitialState = {
 		name: '',
 		email: '',
 		token: '',
+		role: '',
 	},
 };
 
 const userReducer = (state = userInitialState, action) => {
 	switch (action.type) {
 		case LOGIN:
-			localStorage.setItem(
-				'authData',
-				JSON.stringify({ ...action.payload, isAuth: true })
-			);
+			console.log('LOGIN');
+			return { ...state, ...action.payload, isAuth: true };
+		case RE_LOGIN:
+			console.log('RELOGIN');
 			return { ...action.payload, isAuth: true };
 		case LOGOUT:
-			localStorage.clear();
+			console.log('LOGOUT');
 			return userInitialState;
+		case REGISTRATION:
+			console.log('REGISTRATION');
+			return state;
 		default:
 			return state;
 	}
