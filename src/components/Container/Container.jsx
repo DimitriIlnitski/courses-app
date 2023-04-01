@@ -15,16 +15,13 @@ function Container() {
 	useEffect(() => {
 		const refresh = async () => {
 			await dispatch(reLoginUser(authToken));
-			console.log('Go to courses');
 			navigate('/courses');
 		};
-		console.log('Container');
-		console.log(user.isAuth);
+
 		let authToken = localStorage.getItem('authData');
 		if (authToken !== null) {
 			refresh();
 		} else {
-			console.log('Back to Login');
 			navigate('/login');
 		}
 	}, []);
