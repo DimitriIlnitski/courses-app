@@ -16,10 +16,11 @@ import {
 	ADD_AUTHOR,
 	DELETE_AUTHOR,
 	CANCEL,
+	UPDATE_COURSE,
 } from '../../constants';
-import { addCourse } from '../../store/courses/actionCreators';
+import { addCourse, updateCourse } from '../../store/courses/actionCreators';
 
-function CreateCourse({ update }) {
+function CourseForm({ update }) {
 	const coursesList = useSelector(getCourses);
 	const authorsList = useSelector(getAuthors);
 
@@ -36,21 +37,19 @@ function CreateCourse({ update }) {
 
 	useEffect(() => {
 		if (update) {
-			let idWithoutSemicolon = id.slice(1);
-			let course = coursesList.find((item) => item.id === idWithoutSemicolon);
+			let course = coursesList.find((item) => item.id === id);
 			setTitle(course.title);
 			setDescription(course.description);
 			setDuration(course.duration);
-			let filteredCourseAuthors = getAuthorsList(
-				course.authors,
-				availableAuthors
+			let filteredCourseAuthors = availableAuthors.filter((item) =>
+				course.authors.includes(item.id)
 			);
-			//some problem in here
-			console.log(setCourseAuthors(filteredCourseAuthors));
 			setCourseAuthors(filteredCourseAuthors);
-			setAvailableAuthors((prev) =>
-				prev.filter((author) => courseAuthors.includes(author.id))
+			let courseAuthorsIds = filteredCourseAuthors.map((item) => item.id);
+			let filteredAvailableAuthors = availableAuthors.filter(
+				(item) => !courseAuthorsIds.includes(item.id)
 			);
+			setAvailableAuthors(filteredAvailableAuthors);
 		}
 	}, []);
 
@@ -64,8 +63,9 @@ function CreateCourse({ update }) {
 	const handleChangeDescription = handleChange(setDescription);
 	const handleChangeDuration = handleChange(setDuration);
 
-	const createCourse = (e) => {
+	const handleCourse = (e) => {
 		e.preventDefault();
+
 		if (
 			title === '' ||
 			description === '' ||
@@ -73,24 +73,35 @@ function CreateCourse({ update }) {
 			courseAuthors.length === 0
 		) {
 			alert('Please, fill in all fields');
-		} else {
+		} else if (update === false) {
 			let authList = courseAuthors.map((item) => item.id);
-			dispatch(
-				addCourse({
-					id: uuidv4(),
-					title,
-					description,
-					duration,
-					creationDate: formatDate(new Date()),
-					authors: authList,
-				})
-			);
+			let newCourse = {
+				title,
+				description,
+				duration: Number(duration),
+				creationDate: formatDate(new Date()),
+				authors: authList,
+			};
+			dispatch(addCourse(newCourse));
 			setTitle('');
 			setDescription('');
 			setDuration('');
 			setCourseAuthors([]);
+			navigate('/courses');
+		} else if (update === true) {
+			let course = coursesList.find((item) => item.id === id);
+			let authList = courseAuthors.map((item) => item.id);
+			let updatedCourse = {
+				id,
+				title,
+				description,
+				duration: Number(duration),
+				authors: authList,
+				creationDate: course.creationDate,
+			};
+			dispatch(updateCourse(updatedCourse));
+			navigate('/courses');
 		}
-		navigate('/courses');
 	};
 	const cancel = () => {
 		navigate('/courses');
@@ -117,7 +128,7 @@ function CreateCourse({ update }) {
 	);
 	return (
 		<>
-			<form className='create-course' onSubmit={createCourse}>
+			<form className='create-course' onSubmit={handleCourse}>
 				<div className='create-course__title-wrapper'>
 					<div>
 						<Input
@@ -130,11 +141,13 @@ function CreateCourse({ update }) {
 							getInputData={handleChangeTitle}
 						/>
 					</div>
+
 					<Button
 						buttonClass={'create-course__top-button-create'}
-						buttonText={ADD_NEW_COURSE}
+						buttonText={update ? UPDATE_COURSE : ADD_NEW_COURSE}
 						buttonType={'submit'}
 					/>
+
 					<Button
 						buttonClass={'create-course__top-button-cancel'}
 						buttonText={CANCEL}
@@ -170,4 +183,4 @@ function CreateCourse({ update }) {
 	);
 }
 
-export default CreateCourse;
+export default CourseForm;

@@ -13,16 +13,12 @@ const userInitialState = {
 const userReducer = (state = userInitialState, action) => {
 	switch (action.type) {
 		case LOGIN:
-			console.log('LOGIN');
 			return { ...state, ...action.payload, isAuth: true };
 		case RE_LOGIN:
-			console.log('RELOGIN');
 			return { ...action.payload, isAuth: true };
 		case LOGOUT:
-			console.log('LOGOUT');
 			return userInitialState;
 		case REGISTRATION:
-			console.log('REGISTRATION');
 			return state;
 		default:
 			return state;

@@ -2,12 +2,11 @@ import './App.css';
 
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getRequest } from './services';
+import { getUser } from './selectors';
 import { getCourses } from './store/courses/actionCreators';
 import { getAuthors } from './store/authors/actionCreators';
-import { reLoginUser } from './store/user/actionCreators';
 import {
 	Container,
 	Courses,
@@ -21,15 +20,11 @@ import {
 
 function App() {
 	const dispatch = useDispatch();
+	const { isAuth, role } = useSelector(getUser);
 
 	useEffect(() => {
-		async function getInitialData() {
-			let courseFetch = await getRequest('/courses/all');
-			let authorsFetch = await getRequest('/authors/all');
-			dispatch(getCourses(courseFetch.result));
-			dispatch(getAuthors(authorsFetch.result));
-		}
-		getInitialData();
+		dispatch(getCourses());
+		dispatch(getAuthors());
 	}, []);
 
 	return (
@@ -41,7 +36,7 @@ function App() {
 					<Route
 						path='courses'
 						element={
-							<ProtectedRoute>
+							<ProtectedRoute isAuthorized={isAuth}>
 								<Courses />
 							</ProtectedRoute>
 						}
@@ -49,7 +44,7 @@ function App() {
 					<Route
 						path='courses/add'
 						element={
-							<PrivateRouter>
+							<PrivateRouter isAuthorized={isAuth} isAdmin={role}>
 								<CourseForm update={false} />
 							</PrivateRouter>
 						}
@@ -57,7 +52,7 @@ function App() {
 					<Route
 						path='courses/update/:id'
 						element={
-							<PrivateRouter>
+							<PrivateRouter isAuthorized={isAuth} isAdmin={role}>
 								<CourseForm update={true} />
 							</PrivateRouter>
 						}
@@ -65,7 +60,7 @@ function App() {
 					<Route
 						path='courses/:id'
 						element={
-							<ProtectedRoute>
+							<ProtectedRoute isAuthorized={isAuth}>
 								<CourseInfo />
 							</ProtectedRoute>
 						}

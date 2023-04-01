@@ -10,18 +10,14 @@ const coursesInitialState = [];
 const coursesReducer = (state = coursesInitialState, action) => {
 	switch (action.type) {
 		case ADD_COURSE:
-			console.log('ADD_COURSE');
 			return [...state, action.payload];
 		case DELETE_COURSE:
-			console.log('DELETE_COURSE');
 			return state.filter((course) => course.id !== action.payload);
 		case UPDATE_COURSE:
-			console.log('UPDATE_COURSE');
 			return state.map((course) =>
-				course.id === action.payload.id ? action.payload : course
+				course.id === action.payload.id ? { ...action.payload } : course
 			);
 		case GET_COURSES:
-			console.log('GET_COURSES');
 			return [...action.payload];
 		default:
 			return state;

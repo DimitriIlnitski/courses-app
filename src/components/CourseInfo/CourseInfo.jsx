@@ -11,7 +11,6 @@ function CourseInfo() {
 	const authorsList = useSelector(getAuthors);
 
 	const { id } = useParams();
-	console.log(id);
 
 	const memCourse = useMemo(() => {
 		return courseList.find((item) => item.id === id);

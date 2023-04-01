@@ -7,17 +7,19 @@ import {
 
 export const registrationUser = (path, newUser) => {
 	return async (dispatch) => {
-		loginAndRegistrationRequest(path, newUser);
-		dispatch({ type: REGISTRATION });
+		let { successful } = await loginAndRegistrationRequest(path, newUser);
+		if (successful) dispatch({ type: REGISTRATION });
 	};
 };
 
 export const loginUser = (path, data) => {
 	return async (dispatch) => {
-		let { result } = await loginAndRegistrationRequest(path, data);
-		let userData = await getUserRequest(result);
-		localStorage.setItem('authData', result);
-		if (userData) dispatch({ type: LOGIN, payload: userData });
+		let { result, successful } = await loginAndRegistrationRequest(path, data);
+		if (successful) {
+			let userData = await getUserRequest(result);
+			localStorage.setItem('authData', result);
+			if (userData) dispatch({ type: LOGIN, payload: userData });
+		}
 	};
 };
 

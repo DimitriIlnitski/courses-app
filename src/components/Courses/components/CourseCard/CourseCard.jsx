@@ -25,7 +25,7 @@ function CourseCard(props) {
 		dispatch(deleteCourse(id, token));
 	};
 	const updateCourseInCard = () => {
-		navigate(`/courses/update/:${id}`);
+		navigate(`/courses/update/${id}`);
 	};
 
 	return (

@@ -36,7 +36,7 @@ function Login() {
 				password: password,
 			};
 
-			dispatch(loginUser('/login', userData));
+			await dispatch(loginUser('/login', userData));
 			navigate('/courses');
 		}
 	};
