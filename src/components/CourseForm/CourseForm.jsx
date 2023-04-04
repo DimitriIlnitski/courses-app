@@ -37,21 +37,21 @@ function CourseForm({ update }) {
 
 	useEffect(() => {
 		if (update) {
-			let course = coursesList.find((item) => item.id === id);
+			const course = coursesList.find((item) => item.id === id);
 			setTitle(course.title);
 			setDescription(course.description);
 			setDuration(course.duration);
-			let filteredCourseAuthors = availableAuthors.filter((item) =>
+			const filteredCourseAuthors = availableAuthors.filter((item) =>
 				course.authors.includes(item.id)
 			);
 			setCourseAuthors(filteredCourseAuthors);
-			let courseAuthorsIds = filteredCourseAuthors.map((item) => item.id);
-			let filteredAvailableAuthors = availableAuthors.filter(
+			const courseAuthorsIds = filteredCourseAuthors.map((item) => item.id);
+			const filteredAvailableAuthors = availableAuthors.filter(
 				(item) => !courseAuthorsIds.includes(item.id)
 			);
 			setAvailableAuthors(filteredAvailableAuthors);
 		}
-	}, []);
+	}, [update]);
 
 	const handleChange =
 		(setter) =>
@@ -73,7 +73,7 @@ function CourseForm({ update }) {
 			courseAuthors.length === 0
 		) {
 			alert('Please, fill in all fields');
-		} else if (update === false) {
+		} else if (!update) {
 			let authList = courseAuthors.map((item) => item.id);
 			let newCourse = {
 				title,
@@ -88,7 +88,7 @@ function CourseForm({ update }) {
 			setDuration('');
 			setCourseAuthors([]);
 			navigate('/courses');
-		} else if (update === true) {
+		} else if (update) {
 			let course = coursesList.find((item) => item.id === id);
 			let authList = courseAuthors.map((item) => item.id);
 			let updatedCourse = {
