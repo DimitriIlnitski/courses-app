@@ -1,17 +1,18 @@
 import './AddAuthor.css';
 
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, Input } from '../../../../common';
 
 import { CREATE_AUTHOR } from '../../../../constants';
+import { getAuthors } from '../../../../selectors';
 
-import { v4 as uuidv4 } from 'uuid';
 import { addAuthor } from '../../../../store/authors/actionCreators';
 
 function AddAuthor(props) {
 	const dispatch = useDispatch();
+	const allAuthors = useSelector(getAuthors);
 
 	const { availableAuthors, setAvailableAuthors } = props;
 	const [newAuthor, setNewAuthor] = useState('');
@@ -20,18 +21,21 @@ function AddAuthor(props) {
 		setNewAuthor(value);
 	};
 
-	const createAuthor = () => {
+	const createAuthor = async () => {
 		if (new RegExp('^[A-Z][a-zA-Z]{2,}$', 'g').test(newAuthor)) {
-			let newObj = { id: uuidv4(), name: newAuthor };
-			dispatch(addAuthor(newObj));
-			setAvailableAuthors([...availableAuthors, newObj]);
-			setNewAuthor('');
+			let newObj = { name: newAuthor };
+			await dispatch(addAuthor(newObj));
 		} else {
 			alert(
 				'Please enter name of new author, which should start with capital letter'
 			);
 		}
 	};
+
+	useEffect(() => {
+		setAvailableAuthors([...allAuthors]);
+		setNewAuthor('');
+	}, [allAuthors]);
 
 	return (
 		<div className='add-author'>

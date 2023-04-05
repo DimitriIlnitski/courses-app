@@ -5,22 +5,41 @@ import {
 	GET_COURSES,
 } from './actionTypes.js';
 
-export const addCourse = (course) => ({
-	type: ADD_COURSE,
-	payload: course,
-});
+import {
+	deleteCourseRequest,
+	updateCourseRequest,
+	addCourseRequest,
+	getRequest,
+} from '../../services.js';
 
-export const deleteCourse = (courseId) => ({
-	type: DELETE_COURSE,
-	payload: courseId,
-});
+export const addCourse = (course) => {
+	return async (dispatch) => {
+		let token = localStorage.getItem('authData');
+		let { result } = await addCourseRequest(course, token);
+		dispatch({ type: ADD_COURSE, payload: result });
+	};
+};
 
-export const updateCourse = (course) => ({
-	type: UPDATE_COURSE,
-	payload: course,
-});
+export const deleteCourse = (courseId, token) => {
+	return async (dispatch) => {
+		if (courseId) {
+			let { successful } = await deleteCourseRequest(courseId, token);
+			if (successful) dispatch({ type: DELETE_COURSE, payload: courseId });
+		}
+	};
+};
 
-export const getCourses = (courses) => ({
-	type: GET_COURSES,
-	payload: courses,
-});
+export const updateCourse = (data) => {
+	return async (dispatch) => {
+		let token = localStorage.getItem('authData');
+		let { result, successful } = await updateCourseRequest(data, token);
+		if (successful) dispatch({ type: UPDATE_COURSE, payload: result });
+	};
+};
+
+export const getCourses = () => {
+	return async (dispatch) => {
+		let { result, successful } = await getRequest('/courses/all');
+		if (successful) dispatch({ type: GET_COURSES, payload: result });
+	};
+};

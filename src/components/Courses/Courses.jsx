@@ -9,11 +9,12 @@ import { Button } from '../../common';
 
 import { getAuthorsList, filteredList } from '../../helpers';
 import { ADD_NEW_COURSE } from '../../constants';
-import { getCourses, getAuthors } from '../../selectors';
+import { getCourses, getAuthors, getUser } from '../../selectors';
 
 function Courses() {
 	const courseList = useSelector(getCourses);
 	const authorsList = useSelector(getAuthors);
+	const { role } = useSelector(getUser);
 
 	const navigate = useNavigate();
 
@@ -50,13 +51,19 @@ function Courses() {
 					getInputData={getSearchData}
 					handleSubmit={handleSubmit}
 				/>
-				<Button
-					buttonText={ADD_NEW_COURSE}
-					buttonClass={'course-controls__button'}
-					onClickHandler={navigateToAddPage}
-				/>
+				{role === 'admin' && (
+					<Button
+						buttonText={ADD_NEW_COURSE}
+						buttonClass={'course-controls__button'}
+						onClickHandler={navigateToAddPage}
+					/>
+				)}
 			</div>
-			{renderCourseList(searchParams, courseList, authorsList)}
+			{renderCourseList(searchParams, courseList, authorsList).length > 0 ? (
+				renderCourseList(searchParams, courseList, authorsList)
+			) : (
+				<div>Course list is empty</div>
+			)}
 		</>
 	);
 }

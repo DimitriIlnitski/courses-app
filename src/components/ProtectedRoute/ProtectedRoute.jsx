@@ -1,18 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getUser } from '../../selectors';
-function ProtectedRoute({ children }) {
-	const user = useSelector(getUser);
+
+function ProtectedRoute({ children, isAuthorized }) {
 	const navigate = useNavigate();
 	useEffect(() => {
-		let auth = JSON.parse(localStorage.getItem('authData'));
-		if (auth === null) {
-			navigate('/login');
-		}
+		if (!isAuthorized) navigate('/login');
 	}, []);
 
-	return user.isAuth && children;
+	return children;
 }
 
 export default ProtectedRoute;

@@ -15,7 +15,7 @@ const coursesReducer = (state = coursesInitialState, action) => {
 			return state.filter((course) => course.id !== action.payload);
 		case UPDATE_COURSE:
 			return state.map((course) =>
-				course.id === action.payload.id ? action.payload : course
+				course.id === action.payload.id ? { ...action.payload } : course
 			);
 		case GET_COURSES:
 			return [...action.payload];
