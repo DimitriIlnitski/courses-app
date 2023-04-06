@@ -15,6 +15,7 @@
 }
 
 .course-info__description {
+	word-break: break-all;
 	font-size: 1.2rem;
 }
 
