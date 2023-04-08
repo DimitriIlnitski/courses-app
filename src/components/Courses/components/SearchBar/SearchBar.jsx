@@ -6,6 +6,8 @@ import { Input, Button } from '../../../../common';
 
 import { SEARCH } from '../../../../constants';
 
+import PropTypes from 'prop-types';
+
 function SearchBar(props) {
 	const { handleSubmit } = props;
 	return (
@@ -19,5 +21,9 @@ function SearchBar(props) {
 		</form>
 	);
 }
+
+SearchBar.propTypes = {
+	handleSubmit: PropTypes.func,
+};
 
 export default SearchBar;

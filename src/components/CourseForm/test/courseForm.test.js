@@ -3,13 +3,22 @@ import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import {
-	CREATE_AUTHOR,
-	ADD_AUTHOR,
-	DELETE_AUTHOR,
-	mockedStore,
-	mockedState,
-} from '../../../constants';
+import { CREATE_AUTHOR, ADD_AUTHOR, DELETE_AUTHOR } from '../../../constants';
+
+const mockedState = {
+	user: {
+		isAuth: true,
+		name: 'Test Name',
+		role: 'user',
+	},
+	courses: [],
+	authors: [],
+};
+const mockedStore = {
+	getState: () => mockedState,
+	subscribe: jest.fn(),
+	dispatch: jest.fn(),
+};
 
 describe('CourseForm', () => {
 	beforeEach(() => {

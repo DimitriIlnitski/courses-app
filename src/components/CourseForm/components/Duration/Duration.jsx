@@ -5,6 +5,7 @@ import React from 'react';
 import { Input } from '../../../../common';
 
 import { formatTime } from '../../../../helpers';
+import PropTypes from 'prop-types';
 
 function Duration(props) {
 	const { inputData, getInputData, isRequired } = props;
@@ -32,5 +33,11 @@ function Duration(props) {
 		</div>
 	);
 }
+
+Duration.propTypes = {
+	inputData: PropTypes.string,
+	getInputData: PropTypes.func,
+	isRequired: PropTypes.bool,
+};
 
 export default Duration;

@@ -1,6 +1,6 @@
 .course-info {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1f;
+	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 4fr;
 	gap: 3%;
 	padding: 1%;
@@ -24,6 +24,9 @@
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 1;
 	overflow: hidden;
+}
+.course-info__left-side {
+	grid-column: 1 / 3;
 }
 .course-info__right-side {
 	display: flex;

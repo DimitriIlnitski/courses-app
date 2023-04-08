@@ -1,6 +1,7 @@
 import './AuthorTile.css';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Button } from '../../../../common';
 import { DELETE_AUTHOR, ADD_AUTHOR } from '../../../../constants';
@@ -49,5 +50,14 @@ function AuthorTile(props) {
 		</li>
 	);
 }
+
+AuthorTile.propTypes = {
+	buttonInfo: PropTypes.string,
+	author: PropTypes.object,
+	courseAuthors: PropTypes.array,
+	setCourseAuthors: PropTypes.func,
+	availableAuthors: PropTypes.array,
+	setAvailableAuthors: PropTypes.func,
+};
 
 export default AuthorTile;

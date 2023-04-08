@@ -3,7 +3,22 @@ import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CourseForm from '../../CourseForm/CourseForm';
 import Courses from '../Courses';
-import { ADD_NEW_COURSE, mockedStore, mockedState } from '../../../constants';
+import { ADD_NEW_COURSE } from '../../../constants';
+
+const mockedState = {
+	user: {
+		isAuth: true,
+		name: 'Test Name',
+		role: 'user',
+	},
+	courses: [],
+	authors: [],
+};
+const mockedStore = {
+	getState: () => mockedState,
+	subscribe: jest.fn(),
+	dispatch: jest.fn(),
+};
 
 describe('Courses', () => {
 	test('should display amount of CourseCard equal length of courses array', async () => {

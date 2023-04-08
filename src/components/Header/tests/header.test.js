@@ -6,7 +6,20 @@ import { Provider } from 'react-redux';
 
 import { MemoryRouter } from 'react-router-dom';
 
-import { mockedStore } from '../../../constants';
+const mockedState = {
+	user: {
+		isAuth: true,
+		name: 'Test Name',
+		role: 'user',
+	},
+	courses: [],
+	authors: [],
+};
+const mockedStore = {
+	getState: () => mockedState,
+	subscribe: jest.fn(),
+	dispatch: jest.fn(),
+};
 
 describe('Header', () => {
 	test("should have logo and user's name", () => {

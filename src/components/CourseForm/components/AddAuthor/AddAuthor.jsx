@@ -9,12 +9,13 @@ import { CREATE_AUTHOR } from '../../../../constants';
 import { getAuthors } from '../../../../selectors';
 
 import { addAuthor } from '../../../../store/authors/actionCreators';
+import PropTypes from 'prop-types';
 
 function AddAuthor(props) {
 	const dispatch = useDispatch();
 	const allAuthors = useSelector(getAuthors);
 
-	const { availableAuthors, setAvailableAuthors } = props;
+	const { setAvailableAuthors } = props;
 	const [newAuthor, setNewAuthor] = useState('');
 
 	const newAuthorName = ({ target: { value } }) => {
@@ -60,5 +61,9 @@ function AddAuthor(props) {
 		</div>
 	);
 }
+
+AddAuthor.propTypes = {
+	setAvailableAuthors: PropTypes.func,
+};
 
 export default AddAuthor;

@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, Input } from '../../common';
 import { AuthorTile, Description, AddAuthor, Duration } from './components';
 
-import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
-import { formatDate, getAuthorsList } from '../../helpers';
+import { formatDate } from '../../helpers';
 import { getAuthors, getCourses } from '../../selectors';
 import {
 	ADD_NEW_COURSE,
@@ -40,7 +40,7 @@ function CourseForm({ update }) {
 			const course = coursesList.find((item) => item.id === id);
 			setTitle(course.title);
 			setDescription(course.description);
-			setDuration(course.duration);
+			setDuration(String(course.duration));
 			const filteredCourseAuthors = availableAuthors.filter((item) =>
 				course.authors.includes(item.id)
 			);
@@ -186,5 +186,9 @@ function CourseForm({ update }) {
 		</>
 	);
 }
+
+Input.propTypes = {
+	update: PropTypes.string,
+};
 
 export default CourseForm;

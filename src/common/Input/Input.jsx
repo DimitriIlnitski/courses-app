@@ -1,4 +1,5 @@
 import './Input.css';
+import PropTypes from 'prop-types';
 
 function Input(props) {
 	const {
@@ -37,5 +38,19 @@ function Input(props) {
 		</>
 	);
 }
+
+Input.propTypes = {
+	testData: PropTypes.string,
+	labelText: PropTypes.string,
+	className: PropTypes.string,
+	placeholderText: PropTypes.string,
+	inputName: PropTypes.string,
+	inputMinLen: PropTypes.number,
+	inputType: PropTypes.string,
+	isRequired: PropTypes.bool,
+	inputPattern: PropTypes.string,
+	inputData: PropTypes.string,
+	getInputData: PropTypes.func,
+};
 
 export default Input;
