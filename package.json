@@ -65,5 +65,10 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.4"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!axios)/"
+    ]
   }
 }

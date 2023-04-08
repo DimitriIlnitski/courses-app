@@ -3,6 +3,7 @@ import './AuthorTile.css';
 import React from 'react';
 
 import { Button } from '../../../../common';
+import { DELETE_AUTHOR, ADD_AUTHOR } from '../../../../constants';
 
 function AuthorTile(props) {
 	const {
@@ -35,7 +36,14 @@ function AuthorTile(props) {
 	};
 
 	return (
-		<li className='authors-tile'>
+		<li
+			data-testid={
+				buttonInfo === 'Delete author'
+					? `test-author-tile-${DELETE_AUTHOR}`
+					: `test-author-tile-${ADD_AUTHOR}`
+			}
+			className='authors-tile'
+		>
 			<p>{author.name}</p>
 			<Button buttonText={buttonInfo} onClickHandler={handleAuthorsLists} />
 		</li>

@@ -59,11 +59,13 @@ function Courses() {
 					/>
 				)}
 			</div>
-			{renderCourseList(searchParams, courseList, authorsList).length > 0 ? (
-				renderCourseList(searchParams, courseList, authorsList)
-			) : (
-				<div>Course list is empty</div>
-			)}
+			<div data-testid='courses-container'>
+				{renderCourseList(searchParams, courseList, authorsList).length > 0 ? (
+					renderCourseList(searchParams, courseList, authorsList)
+				) : (
+					<></>
+				)}
+			</div>
 		</>
 	);
 }

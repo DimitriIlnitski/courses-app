@@ -2,6 +2,7 @@ import './Input.css';
 
 function Input(props) {
 	const {
+		testData,
 		labelText,
 		className,
 		placeholderText,
@@ -19,6 +20,7 @@ function Input(props) {
 			<label className={`${className}__label`}>
 				{labelText}
 				<input
+					data-testid={testData || ''}
 					className={`input-field ${className}__input`}
 					type={inputType || 'text'}
 					name={inputName}

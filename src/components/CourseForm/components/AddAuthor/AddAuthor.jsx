@@ -21,10 +21,10 @@ function AddAuthor(props) {
 		setNewAuthor(value);
 	};
 
-	const createAuthor = async () => {
+	const createAuthor = () => {
 		if (new RegExp('^[A-Z][a-zA-Z]{2,}$', 'g').test(newAuthor)) {
 			let newObj = { name: newAuthor };
-			await dispatch(addAuthor(newObj));
+			dispatch(addAuthor(newObj));
 		} else {
 			alert(
 				'Please enter name of new author, which should start with capital letter'
@@ -42,6 +42,7 @@ function AddAuthor(props) {
 			<h2 className='add-author__title'>Add author</h2>
 			<div className='add-author__form'>
 				<Input
+					testData={'test-add-author'}
 					labelText={'Author name'}
 					className={'add-author'}
 					placeholderText={'  Enter author name...'}

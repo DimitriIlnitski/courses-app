@@ -29,7 +29,7 @@ function CourseCard(props) {
 	};
 
 	return (
-		<article className='course-card'>
+		<article data-testid='course-card__test' className='course-card'>
 			<div>
 				<h2 className='course-card__title'>{title}</h2>
 				<p className='course-card__description'>{description}</p>

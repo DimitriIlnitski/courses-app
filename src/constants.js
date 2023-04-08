@@ -65,3 +65,18 @@ export const ADD_AUTHOR = 'Add author';
 export const DELETE_AUTHOR = 'Delete author';
 export const REGISTRATION = 'Registration';
 export const LOGIN = 'Login';
+
+export const mockedState = {
+	user: {
+		isAuth: true,
+		name: 'Test Name',
+		role: 'user',
+	},
+	courses: [],
+	authors: [],
+};
+export const mockedStore = {
+	getState: () => mockedState,
+	subscribe: jest.fn(),
+	dispatch: jest.fn(),
+};

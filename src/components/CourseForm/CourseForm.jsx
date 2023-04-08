@@ -108,7 +108,7 @@ function CourseForm({ update }) {
 	};
 
 	const renderAuthorList = (authors, buttonInfo) => (
-		<ul className='create-course__list'>
+		<ul data-testid={`test-${buttonInfo}`} className='create-course__list'>
 			{authors.length === 0 ? (
 				<li className='create-course__list--empty'>Author list is empty</li>
 			) : (
@@ -128,7 +128,11 @@ function CourseForm({ update }) {
 	);
 	return (
 		<>
-			<form className='create-course' onSubmit={handleCourse}>
+			<form
+				data-testid='course-form-test'
+				className='create-course'
+				onSubmit={handleCourse}
+			>
 				<div className='create-course__title-wrapper'>
 					<div>
 						<Input
