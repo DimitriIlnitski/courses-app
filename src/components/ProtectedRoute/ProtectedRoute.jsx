@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function ProtectedRoute({ children, isAuthorized }) {
 	const navigate = useNavigate();
@@ -9,5 +10,10 @@ function ProtectedRoute({ children, isAuthorized }) {
 
 	return children;
 }
+
+ProtectedRoute.propTypes = {
+	children: PropTypes.element,
+	isAuthorized: PropTypes.bool,
+};
 
 export default ProtectedRoute;

@@ -10,6 +10,7 @@ import { formatTime } from '../../../../helpers';
 import { SHOW_COURSE } from '../../../../constants';
 import { getUser } from '../../../../selectors';
 import { deleteCourse } from '../../../../store/courses/actionCreators';
+import PropTypes from 'prop-types';
 
 function CourseCard(props) {
 	const { id, title, description, creationDate, duration, authors } = props;
@@ -29,7 +30,7 @@ function CourseCard(props) {
 	};
 
 	return (
-		<article className='course-card'>
+		<article data-testid='course-card__test' className='course-card'>
 			<div>
 				<h2 className='course-card__title'>{title}</h2>
 				<p className='course-card__description'>{description}</p>
@@ -73,5 +74,14 @@ function CourseCard(props) {
 		</article>
 	);
 }
+
+CourseCard.propTypes = {
+	id: PropTypes.string,
+	title: PropTypes.string,
+	description: PropTypes.string,
+	creationDate: PropTypes.string,
+	duration: PropTypes.number,
+	authors: PropTypes.string,
+};
 
 export default CourseCard;

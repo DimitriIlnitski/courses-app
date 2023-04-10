@@ -9,22 +9,23 @@ import { CREATE_AUTHOR } from '../../../../constants';
 import { getAuthors } from '../../../../selectors';
 
 import { addAuthor } from '../../../../store/authors/actionCreators';
+import PropTypes from 'prop-types';
 
 function AddAuthor(props) {
 	const dispatch = useDispatch();
 	const allAuthors = useSelector(getAuthors);
 
-	const { availableAuthors, setAvailableAuthors } = props;
+	const { setAvailableAuthors } = props;
 	const [newAuthor, setNewAuthor] = useState('');
 
 	const newAuthorName = ({ target: { value } }) => {
 		setNewAuthor(value);
 	};
 
-	const createAuthor = async () => {
+	const createAuthor = () => {
 		if (new RegExp('^[A-Z][a-zA-Z]{2,}$', 'g').test(newAuthor)) {
 			let newObj = { name: newAuthor };
-			await dispatch(addAuthor(newObj));
+			dispatch(addAuthor(newObj));
 		} else {
 			alert(
 				'Please enter name of new author, which should start with capital letter'
@@ -42,6 +43,7 @@ function AddAuthor(props) {
 			<h2 className='add-author__title'>Add author</h2>
 			<div className='add-author__form'>
 				<Input
+					testData={'test-add-author'}
 					labelText={'Author name'}
 					className={'add-author'}
 					placeholderText={'  Enter author name...'}
@@ -59,5 +61,9 @@ function AddAuthor(props) {
 		</div>
 	);
 }
+
+AddAuthor.propTypes = {
+	setAvailableAuthors: PropTypes.func,
+};
 
 export default AddAuthor;

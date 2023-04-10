@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, Input } from '../../common';
 import { AuthorTile, Description, AddAuthor, Duration } from './components';
 
-import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
-import { formatDate, getAuthorsList } from '../../helpers';
+import { formatDate } from '../../helpers';
 import { getAuthors, getCourses } from '../../selectors';
 import {
 	ADD_NEW_COURSE,
@@ -40,7 +40,7 @@ function CourseForm({ update }) {
 			const course = coursesList.find((item) => item.id === id);
 			setTitle(course.title);
 			setDescription(course.description);
-			setDuration(course.duration);
+			setDuration(String(course.duration));
 			const filteredCourseAuthors = availableAuthors.filter((item) =>
 				course.authors.includes(item.id)
 			);
@@ -108,7 +108,7 @@ function CourseForm({ update }) {
 	};
 
 	const renderAuthorList = (authors, buttonInfo) => (
-		<ul className='create-course__list'>
+		<ul data-testid={`test-${buttonInfo}`} className='create-course__list'>
 			{authors.length === 0 ? (
 				<li className='create-course__list--empty'>Author list is empty</li>
 			) : (
@@ -128,7 +128,11 @@ function CourseForm({ update }) {
 	);
 	return (
 		<>
-			<form className='create-course' onSubmit={handleCourse}>
+			<form
+				data-testid='course-form-test'
+				className='create-course'
+				onSubmit={handleCourse}
+			>
 				<div className='create-course__title-wrapper'>
 					<div>
 						<Input
@@ -182,5 +186,9 @@ function CourseForm({ update }) {
 		</>
 	);
 }
+
+Input.propTypes = {
+	update: PropTypes.string,
+};
 
 export default CourseForm;

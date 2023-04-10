@@ -1,7 +1,9 @@
 import './Input.css';
+import PropTypes from 'prop-types';
 
 function Input(props) {
 	const {
+		testData,
 		labelText,
 		className,
 		placeholderText,
@@ -19,6 +21,7 @@ function Input(props) {
 			<label className={`${className}__label`}>
 				{labelText}
 				<input
+					data-testid={testData || ''}
 					className={`input-field ${className}__input`}
 					type={inputType || 'text'}
 					name={inputName}
@@ -35,5 +38,19 @@ function Input(props) {
 		</>
 	);
 }
+
+Input.propTypes = {
+	testData: PropTypes.string,
+	labelText: PropTypes.string,
+	className: PropTypes.string,
+	placeholderText: PropTypes.string,
+	inputName: PropTypes.string,
+	inputMinLen: PropTypes.number,
+	inputType: PropTypes.string,
+	isRequired: PropTypes.bool,
+	inputPattern: PropTypes.string,
+	inputData: PropTypes.string,
+	getInputData: PropTypes.func,
+};
 
 export default Input;

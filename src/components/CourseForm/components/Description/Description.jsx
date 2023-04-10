@@ -1,6 +1,7 @@
 import './Description.css';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Description(props) {
 	const { inputData, getInputData } = props;
@@ -23,5 +24,10 @@ function Description(props) {
 		</label>
 	);
 }
+
+Description.propTypes = {
+	inputData: PropTypes.string,
+	getInputData: PropTypes.func,
+};
 
 export default Description;
